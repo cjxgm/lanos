@@ -12,6 +12,7 @@ void printf(const char * fmt, ...)
 {
 	const void * p = (void *)&fmt + 4;
 	char ch;
+	char * tmp;
 
 	while ((ch = *fmt++)) {
 		switch (ch) {
@@ -34,6 +35,18 @@ void printf(const char * fmt, ...)
 					case 'U':	// I'm lazy...
 					case 'u':
 						print_dec_u32(*(u32 *)p);
+						p += 4;
+						break;
+					case 'C':	// I'm lazy...
+					case 'c':
+						monitor_put(*(char *)p);
+						p += 4;
+						break;
+					case 'S':	// I'm lazy...
+					case 's':
+						tmp = *(char **)p;
+						while (*tmp)
+							monitor_put(*tmp++);
 						p += 4;
 						break;
 					default:

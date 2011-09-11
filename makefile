@@ -2,14 +2,14 @@
 all:
 	make -C src
 clean:
-	make clean -C src
+	@make clean -C src
 	rm -f log
 	rm -f floppy.img
 	[ -d "mnt" ] && rmdir mnt || true
 rebuild: clean all
 debug: all floppy.img
 	@echo running bochs...
-	@bochs -q
+	@bochs -q || true
 qemu: all floppy.img
 	@echo running qemu...
 	@qemu -boot a -fda floppy.img

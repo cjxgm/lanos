@@ -11,7 +11,8 @@ int main(void * multiboot_header)
 
 	printf("printf test: %x\n", 0x1234abcd);
 	printf("\t%d\t%u", -1, 12);
-	printf("\t%d\t%d", 0, -0);
+	printf("\t%d\t%d\n", 0, -0);
+	printf("1234\t%c\t%s\n", 'L', "OS!!");
 
     return 0;
 }
