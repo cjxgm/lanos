@@ -32,5 +32,6 @@ copied in (*this will need the root's permission*). Finally, the
 virtual machine will run. As this OS is in the very alpha stage,
 you can only see the output for testing.
 
-You can try to modify it. The main code is src/main.c
+You can try to modify it. The main code is src/main.c. *Before you do it,
+set your editor's tab width to 4 spaces!*
 
