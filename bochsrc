@@ -1,0 +1,4 @@
+megs: 32
+floppya: 1_44=floppy.img, status=inserted
+boot: a
+#log: log
