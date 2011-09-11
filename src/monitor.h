@@ -1,6 +1,6 @@
 
-#ifndef __MONITOR_H__
-#define __MONITOR_H__
+#ifndef __MONITOR__
+#define __MONITOR__
 
 // write a single character out to the screen.
 void monitor_put(char c);

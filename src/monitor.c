@@ -9,17 +9,23 @@ static u16 * const video_memory = (u16 *)0xb8000;
 static u8 cursor_x = 0;
 static u8 cursor_y = 0;
 
+static u8 out_mode = 0;
+
 // writes a single character out to the screen.
 void monitor_put(char c)
 {
-	// the background colour is black (0), the foreground is white (7).
-	u8 back_color = 0;
-	u8 fore_color = 7;
+	static u16 attribute = 7 << 8; // 7: white text with black background.
 
-	// the attribute is made up of two nibbles and a byte - the lower
-	// nibble being the foreground color, the upper nibble being the
-	// background color, and the lower byte being the character.
-	u16 attribute = ((back_color << 4) | (fore_color & 0x0F)) << 8;
+	// You can change attribute by using "\e\x??"
+	if (out_mode == 1) {
+		attribute = c << 8;
+		out_mode = 0;
+		return;
+	}
+	if (c == '\033') {	// \033 = \e
+		out_mode = 1;
+		return;
+	}
 
 	// handle a backspace, by moving the cursor back one space
 	if (c == 0x08 && cursor_x)

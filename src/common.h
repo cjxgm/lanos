@@ -1,6 +1,6 @@
 
-#ifndef __COMMON_H__
-#define __COMMON_H__
+#ifndef __COMMON__
+#define __COMMON__
 
 typedef unsigned int	u32;
 typedef unsigned short	u16;
