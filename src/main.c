@@ -2,7 +2,7 @@
 #include "monitor.h"
 #include "printf.h"
 
-int main(void * mboot_ptr)
+int main(void * multiboot_header)
 {
 	monitor_clear();
 

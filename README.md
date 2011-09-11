@@ -3,6 +3,9 @@ lanos - Lanos' AN OS
 The Lanos Project<br>
 by eXerigumo Clanjor
 
+This project is licensed under GPLv2.<br>
+*ABSOLUTELY NO WARRANTY!*
+
 Introduction
 ------------------------------------------------------------
 This project is a sub project of cjsp (Clanjor Selfaction Project) -
