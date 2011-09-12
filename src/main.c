@@ -4,14 +4,6 @@
 #include "printf.h"
 #include "desc_table.h"
 
-// colors
-// usage: printf("\e%c", R|G|B);
-#define H			(1<<3)
-#define R			(1<<2)
-#define G			(1<<1)
-#define B			(1<<0)
-#define BG(CLR)		((CLR) << 4)
-
 struct mboot_info
 {
 	u32	flags;
@@ -39,9 +31,9 @@ int main(struct mboot_info * mb_header)
 
 	printf("\n\e%cinitializing GDT... ", H|R|G|B);
 	init_gdt();
-	printf("\e%c[done]\n", H|R);
+	printf("\e%c[done]\n", H|G);
 
-	printf("\n\e%cinitializing IDT... ", H|R|G|B);
+	printf("\e%cinitializing IDT... ", H|R|G|B);
 	init_idt();
 	printf("\e%c[done]\n", H|G);
 

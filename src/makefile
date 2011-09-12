@@ -3,8 +3,8 @@ CC = gcc
 
 SOURCES = boot.o main.o monitor.o common.o printf.o	\
 			desc_table.o desc_table_flush.o interrupt.o isr.o
-CFLAGS  = -Wall -O3 -ffreestanding -nostdlib -nostdinc -fno-builtin -fno-stack-protector
-LDFLAGS = -Tlink.ld -s
+CFLAGS  = -Wall -ffreestanding -nostdlib -nostdinc -fno-builtin -fno-stack-protector
+LDFLAGS = -Tlink.ld
 ASFLAGS = -felf
 
 all: $(SOURCES) kernel
