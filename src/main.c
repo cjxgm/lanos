@@ -37,8 +37,9 @@ int main(struct mboot_info * mb_header)
 	init_idt();
 	printf("\e%c[done]\n", H|G);
 
-	asm volatile ("int $0x3");
-	asm volatile ("int $0x4");
+	int i = 10;
+	while (i + 1)
+		printf("%d\n", 100/i--);
 
 	monitor_write("\e\x07\n\n===  kernel main ends  ===\n");
     return 0;
