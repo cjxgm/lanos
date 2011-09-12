@@ -1,8 +1,8 @@
 
 [bits 32]
 
-%macro ISR_NOERRCODE 1		; define a macro, taking one parameter
-	[global isr%1]			; %1 accesses the first parameter.
+%macro ISR_NOERRCODE 1
+	[global isr%1]
 	isr%1:
 		cli
 		push byte 0
@@ -15,6 +15,15 @@
 	isr%1:
 		cli
 		push byte %1
+		jmp isr_common_stub
+%endmacro
+
+%macro IRQ 1
+	[global irq%1]
+	irq%1:
+		cli
+		push byte 0
+		push byte %1 + 32
 		jmp isr_common_stub
 %endmacro
 
@@ -51,12 +60,26 @@ ISR_NOERRCODE 29
 ISR_NOERRCODE 30
 ISR_NOERRCODE 31
 
+IRQ 0
+IRQ 1
+IRQ 2
+IRQ 3
+IRQ 4
+IRQ 5
+IRQ 6
+IRQ 7
+IRQ 8
+IRQ 9
+IRQ 10
+IRQ 11
+IRQ 12
+IRQ 13
+IRQ 14
+IRQ 15
+
 ; in isr.c
 [extern isr_handler]
 
-; This is our common ISR stub. It saves the processor state, sets
-; up for kernel mode segments, calls the C-level fault handler,
-; and finally restores the stack frame.
 isr_common_stub:
 	pusha					; pushes edi,esi,ebp,esp,ebx,edx,ecx,eax
 
@@ -78,7 +101,7 @@ isr_common_stub:
 	mov		gs, ax
 
 	popa					; pops edi,esi,ebp...
-	add esp, 8				; cleans up the pushed error code
+	add		esp, 8			; cleans up the pushed error code
 							; and pushed ISR number
 	sti
 	iret					; pops 5 things at once:

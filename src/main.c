@@ -3,6 +3,7 @@
 #include "monitor.h"
 #include "printf.h"
 #include "desc_table.h"
+#include "timer.h"
 
 struct mboot_info
 {
@@ -29,17 +30,23 @@ int main(struct mboot_info * mb_header)
 						H|R|G|B, mb_header->high_mem,
 						R|G|B,   mb_header->high_mem);
 
-	printf("\n\e%cinitializing GDT... ", H|R|G|B);
+	printf("\n\e%cinitializing GDT...\t\t", H|R|G|B);
 	init_gdt();
 	printf("\e%c[done]\n", H|G);
 
-	printf("\e%cinitializing IDT... ", H|R|G|B);
+	printf("\e%cinitializing IDT...\t\t", H|R|G|B);
 	init_idt();
 	printf("\e%c[done]\n", H|G);
 
+	printf("\e%cinitializing timer...\t", H|R|G|B);
+	init_timer(50);
+	printf("\e%c[done]\n", H|G);
+
+	/*
 	int i = 10;
 	while (i + 1)
 		printf("%d\n", 100/i--);
+	*/
 
 	monitor_write("\e\x07\n\n===  kernel main ends  ===\n");
     return 0;

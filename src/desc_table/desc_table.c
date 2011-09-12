@@ -38,6 +38,22 @@ extern void isr28(void);
 extern void isr29(void);
 extern void isr30(void);
 extern void isr31(void);
+extern void irq0(void);
+extern void irq1(void);
+extern void irq2(void);
+extern void irq3(void);
+extern void irq4(void);
+extern void irq5(void);
+extern void irq6(void);
+extern void irq7(void);
+extern void irq8(void);
+extern void irq9(void);
+extern void irq10(void);
+extern void irq11(void);
+extern void irq12(void);
+extern void irq13(void);
+extern void irq14(void);
+extern void irq15(void);
 
 static void gdt_set_gate(s32 num, u32 base, u32 limit, u8 access, u8 gran);
 static void idt_set_gate(u8 num, u32 base, u16 sel, u8 flags);
@@ -102,6 +118,37 @@ void init_idt(void)
 	ISR(30);
 	ISR(31);
 #undef ISR
+
+	// Remap the irq table.
+	outb(0x20, 0x11);
+	outb(0xA0, 0x11);
+	outb(0x21, 0x20);
+	outb(0xA1, 0x28);
+	outb(0x21, 0x04);
+	outb(0xA1, 0x02);
+	outb(0x21, 0x01);
+	outb(0xA1, 0x01);
+	outb(0x21, 0x0);
+	outb(0xA1, 0x0);
+
+#define IRQ(I)	idt_set_gate(32 + I, (u32)&irq ## I, 0x08, 0x8E);
+	IRQ(0);
+	IRQ(1);
+	IRQ(2);
+	IRQ(3);
+	IRQ(4);
+	IRQ(5);
+	IRQ(6);
+	IRQ(7);
+	IRQ(8);
+	IRQ(9);
+	IRQ(10);
+	IRQ(11);
+	IRQ(12);
+	IRQ(13);
+	IRQ(14);
+	IRQ(15);
+#undef IRQ
 
 	idt_flush(&idt_ptr);
 }

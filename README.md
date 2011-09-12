@@ -35,3 +35,7 @@ you can only see the output for testing.
 You can try to modify it. The main code is src/main.c. *Before you do it,
 set your editor's tab width to 4 spaces!*
 
+TODO
+------------------------------------------------------------
+Add timer, but does not work.
+
