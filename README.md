@@ -39,7 +39,7 @@ You can try to modify it. The main code is src/main.c. *Before you do it,
 set your editor's tab width to 4 spaces!*
 
 And, i have to tell you, that when you press ESC, the system will
-hanged up (on purpose).
+hang up (on purpose).
 
 Issues
 ------------------------------------------------------------
