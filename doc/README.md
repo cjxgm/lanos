@@ -10,7 +10,7 @@ Lanos 是一个 32 位不全保护模式非 UNIX 克隆的操作系统
 尽早实现实用功能（如，在完成屏幕管理模块后就立即实现了 printf）。
 Lanos 将提供 OpenGL、数字音频(digital audio)、高分辨率、
 鼠标/键盘/（可能还有）手柄驱动、多线程单进程
-(single process with multi-threads)的支持。Lanos _可能_会提供
+(single process with multi-threads)的支持。Lanos <em>可能</em>会提供
 文件操作的支持，且所有应用程序（目前）必须硬编码(hard-coded)于内核。
 
 Lanos 是一个给 hackers 的玩具。Lanos 可用于制作可引导实时（三维）动画
@@ -22,12 +22,12 @@ Lanos 是一个给 hackers 的玩具。Lanos 可用于制作可引导实时（�
 
  * · base/
  * · video/
- *   audio/
+ * &nbsp;&nbsp;audio/
  * · misc/
  * · keyboard/
- *   mouse/
+ * &nbsp;&nbsp;mouse/
  * · include/
- *   gl/
+ * &nbsp;&nbsp;gl/
  * · app/
  * · math/
 
