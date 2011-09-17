@@ -3,7 +3,10 @@ lanos - Lanos' AN OS
 The Lanos Project<br>
 by eXerigumo Clanjor
 
-This project is licensed under GPLv2.<br>
+中文文档见 doc 目录(see doc/ for Chinese document)
+
+All the codes are licensed under GPLv2,<br>
+and all the artworks/documents are licensed under CC-BY-SA 3.0,<br>
 *ABSOLUTELY NO WARRANTY!*
 
 Introduction
