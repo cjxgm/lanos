@@ -1,6 +1,5 @@
 
 #include "monitor.h"
-#include "common.h"
 
 static void move_cursor(void);
 static void scroll(void);
@@ -22,13 +21,28 @@ void monitor_put(char c)
 		out_mode = 0;
 		return;
 	}
-	if (c == '\033') {	// \033 = \e
+	if (c == '\033') {	// \033 = \e, change attribute
 		out_mode = 1;
 		return;
 	}
 
+	if (c == '\032')	// \032, clear whole screen
+		monitor_clear();
+
+	else if (c == '\031') {	// \031, clear current line
+		u8  attribute = (0 /*black*/ << 4) | (15 /*white*/ & 0x0F);
+		u16 blank     = 0x20 /* space */   | (attribute << 8);
+
+		int i;
+		for (i=cursor_y*80; i<(cursor_y+1)*80; i++)
+			video_memory[i] = blank;
+
+		cursor_x = 0;
+		move_cursor();
+	}
+
 	// handle a backspace, by moving the cursor back one space
-	if (c == 0x08 && cursor_x)
+	else if (c == 0x08 && cursor_x)
 		cursor_x--;
 
 	// handle a tab by increasing the cursor's X, but only to a point
@@ -129,3 +143,17 @@ void scroll(void)
 		cursor_y = 24;
 	}
 }
+
+void monitor_get_cursor_pos(u8 * x, u8 * y)
+{
+	*x = cursor_x;
+	*y = cursor_y;
+}
+
+void monitor_set_cursor_pos(u8 x, u8 y)
+{
+	cursor_x = x;
+	cursor_y = y;
+	move_cursor();
+}
+

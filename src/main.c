@@ -4,6 +4,7 @@
 #include "printf.h"
 #include "desc_table.h"
 #include "timer.h"
+#include "keyboard.h"
 
 struct mboot_info
 {
@@ -15,7 +16,7 @@ struct mboot_info
 int main(struct mboot_info * mb_header)
 {
 	monitor_clear();
-	monitor_write("=== kernel main begins ===\n\n");
+	monitor_write("\n=== kernel initializing begins ===\n\n");
 
 	printf("\e%cWelcome to LANOS!\e%c\n\n", H|G, R|G|B);
 
@@ -39,15 +40,10 @@ int main(struct mboot_info * mb_header)
 	INIT(gdt);
 	INIT(idt);
 	INIT(timer, 50);
+	INIT(keyboard);
 #undef INIT
 
-	/*
-	int i = 10;
-	while (i + 1)
-		printf("%d\n", 100/i--);
-	*/
-
-	monitor_write("\e\x07\n\n===  kernel main ends  ===\n");
+	monitor_write("\n\e\x07===  kernel initializing ends  ===\n");
     return 0;
 }
 

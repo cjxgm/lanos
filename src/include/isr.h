@@ -16,7 +16,8 @@ typedef void (*irq_handler_t)(regs_t);
 
 void register_irq_handler(u8 n, irq_handler_t handler);
 
-#define IRQ_TIMER	0
+#define IRQ_TIMER		0
+#define IRQ_KEYBOARD	1
 
 #endif
 

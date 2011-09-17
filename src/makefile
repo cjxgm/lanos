@@ -9,7 +9,9 @@ OBJ_VIDEO = video/monitor.o
 
 OBJ_MISC = misc/common.o misc/printf.o misc/assert.o
 
-SOURCES = $(OBJ_BASE) $(OBJ_VIDEO) $(OBJ_MISC) main.o
+OBJ_KEYBOARD = keyboard/keyboard.o
+
+SOURCES = $(OBJ_BASE) $(OBJ_VIDEO) $(OBJ_MISC) $(OBJ_KEYBOARD) main.o
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
 		  -fno-builtin -fno-stack-protector
 LDFLAGS = -Tmisc/link.ld
