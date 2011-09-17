@@ -39,19 +39,19 @@ Lanos 是一个给 hackers 的玩具。Lanos 可用于制作可引导实时（�
 ------------------------------------------------------------
 首先，你需要获得源代码：
 
- git clone git://github.com/cjxgm/lanos.git
+	git clone git://github.com/cjxgm/lanos.git
 
 接着，编译内核：
 
- make
+	make
 
 对于 bochs 用户，可以用
 
- make debug
+	make debug
 
 来尝试运行，而对于 qemu 用户，可以用
 
- make qemu
+	make qemu
 
 尝试运行
 
