@@ -7,7 +7,7 @@ Lanos 中文文档
 ------------------------------------------------------------
 Lanos 是一个 32 位不全保护模式非 UNIX 克隆的操作系统
 (32-bit not-so-protected non-UNIX-clone OS)。Lanos 将
-尽早实现使用功能（如，在完成屏幕管理模块后就立即实现了 printf）。
+尽早实现实用功能（如，在完成屏幕管理模块后就立即实现了 printf）。
 Lanos 将提供 OpenGL、数字音频(digital audio)、高分辨率、
 鼠标/键盘/（可能还有）手柄驱动、多线程单进程
 (single process with multi-threads)的支持。Lanos *可能*会提供
