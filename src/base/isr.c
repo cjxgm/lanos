@@ -51,8 +51,6 @@ void isr_handler(regs_t regs)
 		while (1);
 	}
 
-	printf("irq: %d\n", regs.int_no - 32);
-
 	// irq
 	if (regs.int_no < 32 + 16) {
 		// send an EOI (end of interrupt) signal to the PICs.

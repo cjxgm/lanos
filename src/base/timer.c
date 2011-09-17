@@ -7,7 +7,9 @@ static u32 tick = 0;
 
 static void timer_cb(regs_t regs)
 {
-	printf("Tick: %d\n", tick++);
+	tick++;
+	if (!(tick % 50))
+		printf("tick: %d\n", tick++);
 }
 
 void init_timer(u32 freq)
@@ -24,8 +26,11 @@ void init_timer(u32 freq)
 	u8 l = (divisor & 0xFF);
 	u8 h = ((divisor>>8) & 0xFF);
 
-	// Send the frequency divisor.
+	// send the frequency divisor.
 	outb(0x40, l);
 	outb(0x40, h);
+
+	// if not "sti", timer will not work!
+	asm volatile ("sti");
 }
 

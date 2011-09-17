@@ -30,17 +30,16 @@ int main(struct mboot_info * mb_header)
 						H|R|G|B, mb_header->high_mem,
 						R|G|B,   mb_header->high_mem);
 
-	printf("\n\e%cinitializing GDT...\t\t", H|R|G|B);
-	init_gdt();
+#define INIT(X, ...) \
+	printf("\e%cinitializing " #X "...\t", H|R|G|B); \
+	init_##X(__VA_ARGS__);\
 	printf("\e%c[done]\n", H|G);
 
-	printf("\e%cinitializing IDT...\t\t", H|R|G|B);
-	init_idt();
-	printf("\e%c[done]\n", H|G);
-
-	printf("\e%cinitializing timer...\t", H|R|G|B);
-	init_timer(50);
-	printf("\e%c[done]\n", H|G);
+	printf("\n");
+	INIT(gdt);
+	INIT(idt);
+	INIT(timer, 50);
+#undef INIT
 
 	/*
 	int i = 10;
