@@ -3,7 +3,7 @@ lanos - Lanos' AN OS
 The Lanos Project<br>
 by eXerigumo Clanjor
 
-中文文档见 doc 目录(see doc/ for Chinese document)
+<h2>中文文档见 doc 目录(see doc/ for Chinese document)</h2>
 
 All the codes are licensed under GPLv2,<br>
 and all the artworks/documents are licensed under CC-BY-SA 3.0,<br>
@@ -38,7 +38,9 @@ you can only see the output for testing.
 You can try to modify it. The main code is src/main.c. *Before you do it,
 set your editor's tab width to 4 spaces!*
 
-TODO
+Issues
 ------------------------------------------------------------
-Add timer, but does not work.
+("\*" means have been solved)
+
+ * 2011/9/11 * Add timer, but does not work.
 
