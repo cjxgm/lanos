@@ -1,12 +1,17 @@
 
 CC = gcc
 
-SOURCES = boot/boot.o main.o video/monitor.o misc/common.o \
-			misc/printf.o interrupt/interrupt.o interrupt/isr.o \
-			desc_table/desc_table.o desc_table/desc_table_flush.o \
-			misc/assert.o interrupt/timer.o
+OBJ_BASE = base/boot.o \
+		   base/interrupt.o  base/isr.o base/timer.o \
+		   base/desc_table.o base/desc_table_flush.o
+
+OBJ_VIDEO = video/monitor.o
+
+OBJ_MISC = misc/common.o misc/printf.o misc/assert.o
+
+SOURCES = $(OBJ_BASE) $(OBJ_VIDEO) $(OBJ_MISC) main.o
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
-			-fno-builtin -fno-stack-protector
+		  -fno-builtin -fno-stack-protector
 LDFLAGS = -Tmisc/link.ld
 ASFLAGS = -felf
 
