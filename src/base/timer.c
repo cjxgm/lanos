@@ -4,24 +4,24 @@
 #include "printf.h"
 #include "monitor.h"
 
-static u32 tick = 0;
+static u32 ticks = 0;
 
 static void timer_cb(regs_t regs)
 {
-	tick++;
+	ticks++;
 	u8 x, y;
 	monitor_get_cursor_pos(&x, &y);
 	monitor_set_cursor_pos(0, 0);
 	printf("\031\e%crunning \e%c%d\e%cs\n",
-			H|R|B, H|R|G|B, tick / 50, R|G|B);
+			H|R|B, H|R|G|B, ticks / TICKS_PER_SEC, R|G|B);
 	monitor_set_cursor_pos(x, y);
 }
 
-void init_timer(u32 freq)
+void init_timer(void)
 {
 	register_irq_handler(IRQ_TIMER, &timer_cb);
 
-	u32 divisor = 1193180 / freq;
+	u32 divisor = 1193180 / TICKS_PER_SEC;
 
 	// send the command byte.
 	outb(0x43, 0x36);
@@ -37,5 +37,10 @@ void init_timer(u32 freq)
 
 	// if not "sti", timer will not work!
 	asm volatile ("sti");
+}
+
+u32 get_ticks(void)
+{
+	return ticks;
 }
 

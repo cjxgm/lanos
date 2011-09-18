@@ -1,5 +1,5 @@
 
-all: src/kernel floppy.img
+all: kernel floppy.img
 clean:
 	@echo -e "\e[1;33mcleaning up...\e[m"
 	@make clean -C src
@@ -14,7 +14,7 @@ qemu: all
 	@echo -e "\e[1;33mrunning qemu...\e[m"
 	@qemu -boot a -fda floppy.img
 
-src/kernel:
+kernel:
 	@echo -e "\e[1;33mcompiling kernel...\e[m"
 	@make -C src
 floppy.img: src/kernel grub.img

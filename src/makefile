@@ -5,7 +5,7 @@ OBJ_BASE = base/boot.o \
 		   base/interrupt.o  base/isr.o base/timer.o \
 		   base/desc_table.o base/desc_table_flush.o
 
-OBJ_VIDEO = video/monitor.o
+OBJ_VIDEO = video/monitor.o video/video.o
 
 OBJ_MISC = misc/common.o misc/printf.o misc/assert.o
 

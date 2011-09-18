@@ -4,7 +4,10 @@
 
 #include "common.h"
 
-void init_timer(u32 freq);
+#define TICKS_PER_SEC	50
+
+void init_timer(void);
+u32  get_ticks (void);
 
 #endif
 

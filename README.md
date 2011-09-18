@@ -46,4 +46,4 @@ Issues
 ("\*" means have been solved)
 
  * 2011/9/11 * Add timer, but does not work.
-
+ * 2011/9/18&nbsp;&nbsp;&nbsp;Add video 1024x768x24 mode, but do not work.

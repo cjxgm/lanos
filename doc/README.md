@@ -41,7 +41,7 @@ Lanos 是一个给 hackers 的玩具。Lanos 可用于制作可引导实时（�
 
 	git clone git://github.com/cjxgm/lanos.git
 
-接着，编译内核：
+接着，编译内核（由于要 mount 软盘镜像，需要有 root 权限）：
 
 	make
 
@@ -66,4 +66,5 @@ Issues
 （“·”表示已解决）
 
  * 2011/9/11 · 计时器不工作
+ * 2011/9/18&nbsp;&nbsp;&nbsp;加入 1024x768x24 图形模式，但不工作
 

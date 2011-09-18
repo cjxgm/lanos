@@ -3,6 +3,11 @@
 
 // write/read data to/from the specified port.
 
+void outw(u16 port, u16 value)
+{
+	asm volatile ("outw %1, %0" : : "dN" (port), "a" (value));
+}
+
 void outb(u16 port, u8 value)
 {
 	asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));

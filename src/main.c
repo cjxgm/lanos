@@ -39,7 +39,7 @@ int main(struct mboot_info * mb_header)
 	printf("\n");
 	INIT(gdt);
 	INIT(idt);
-	INIT(timer, 50);
+	INIT(timer);
 	INIT(keyboard);
 #undef INIT
 
