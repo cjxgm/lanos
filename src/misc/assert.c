@@ -6,6 +6,7 @@ void assert_handler(const char * file,
 					int          line,
 					const char * err)
 {
+	asm volatile ("cli");
 	printf("\e%cAssertion Failure: "
 			"\e%c%s: \e%c%u\n"
 			"\t\e%c%s\n",

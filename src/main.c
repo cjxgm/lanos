@@ -11,9 +11,13 @@ struct mboot_info
 	u32	flags;
 	u32	low_mem;
 	u32	high_mem;
+	u32 reserved[14];
+	u32 vbe_control_info;
+	u32 vbe_mode_info;
+	u32 vbe_mode;
 };
 
-int main(struct mboot_info * mb_header)
+int main(struct mboot_info * mb_info)
 {
 	monitor_clear();
 	monitor_write("\n=== kernel initializing begins ===\n\n");
@@ -22,14 +26,19 @@ int main(struct mboot_info * mb_header)
 
 	printf("\e%cmultiboot info: \e%c\n", H|B, R|G|B);
 	printf("flags	:	\e%c%bh\e%c (%Xh)\n",
-						H|R|G|B, mb_header->flags,
-						R|G|B  , mb_header->flags);
+						H|R|G|B, mb_info->flags,
+						R|G|B  , mb_info->flags);
 	printf("low  mem:	\e%c%Xh\e%c (%u)\n",
-						H|R|G|B, mb_header->low_mem,
-						R|G|B,   mb_header->low_mem);
+						H|R|G|B, mb_info->low_mem,
+						R|G|B,   mb_info->low_mem);
 	printf("high mem:	\e%c%Xh\e%c (%u)\n",
-						H|R|G|B, mb_header->high_mem,
-						R|G|B,   mb_header->high_mem);
+						H|R|G|B, mb_info->high_mem,
+						R|G|B,   mb_info->high_mem);
+	printf("vbe info:	\e%c%d %d %d\e%c\n",
+						H|R|G|B, mb_info->vbe_control_info,
+								 mb_info->vbe_mode_info,
+								 mb_info->vbe_mode,
+						R|G|B);
 
 #define INIT(X, ...) \
 	printf("\e%cinitializing " #X "...\t", H|R|G|B); \

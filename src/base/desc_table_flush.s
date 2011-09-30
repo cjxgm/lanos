@@ -8,6 +8,7 @@ idt_flush:
 	; Get the pointer to the IDT, passed as a parameter. 
 	mov		eax, [esp+4]
 	lidt	[eax]			; Load the IDT pointer.
+	sti
 	ret
 
 gdt_flush:

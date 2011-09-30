@@ -34,9 +34,6 @@ void init_timer(void)
 	// send the frequency divisor.
 	outb(0x40, l);
 	outb(0x40, h);
-
-	// if not "sti", timer will not work!
-	asm volatile ("sti");
 }
 
 u32 get_ticks(void)

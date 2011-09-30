@@ -22,8 +22,6 @@ void keyboard_handler(regs_t regs)
 
 	if (key == 0x3B) {	// F1
 		init_video();
-		void draw_test(void);
-		draw_test();
 	}
 
 	printf("Key hitted: %x (%d)\n", key, key);

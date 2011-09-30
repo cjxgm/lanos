@@ -24,7 +24,7 @@ clean:
 	rm -f kernel
 
 kernel: $(SOURCES)
-	ld $(LDFLAGS) -o kernel $(SOURCES)
+	ld $(LDFLAGS) -o $@ $(SOURCES)
 
 .s.o:
 	nasm $(ASFLAGS) $<
