@@ -5,6 +5,7 @@
 #include "desc_table.h"
 #include "timer.h"
 #include "keyboard.h"
+#include "app/lush.h"
 
 struct mboot_info
 {
@@ -20,9 +21,8 @@ struct mboot_info
 int main(struct mboot_info * mb_info)
 {
 	monitor_clear();
-	monitor_write("\n=== kernel initializing begins ===\n\n");
 
-	printf("\e%cWelcome to LANOS!\e%c\n\n", H|G, R|G|B);
+	printf("\n\n\e%cWelcome to LANOS!\e%c\n\n", H|G, R|G|B);
 
 	printf("\e%cmultiboot info: \e%c\n", H|B, R|G|B);
 	printf("flags	:	\e%c%bh\e%c (%Xh)\n",
@@ -51,8 +51,10 @@ int main(struct mboot_info * mb_info)
 	INIT(timer);
 	INIT(keyboard);
 #undef INIT
+	printf("\n\e%c========================================"
+			"========================================\n", H|G|B);
 
-	monitor_write("\n\e\x07===  kernel initializing ends  ===\n");
+	app_lush();
     return 0;
 }
 
