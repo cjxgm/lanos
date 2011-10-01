@@ -129,6 +129,7 @@ void scanf(const char * fmt, ...)
 	const void * p = (void *)&fmt + 4;
 	char ch;
 	char tmp;
+	char * s;
 
 	while ((ch = *fmt++)) {
 		switch (ch) {
@@ -140,17 +141,17 @@ void scanf(const char * fmt, ...)
 					case 'x':
 					case 'P':
 					case 'p':
-						// TODO
+						assert(!"TODO");
 						p += 4;
 						break;
 					case 'D':	// I'm lazy...
 					case 'd':
-						// TODO
+						assert(!"TODO");
 						p += 4;
 						break;
 					case 'U':	// I'm lazy...
 					case 'u':
-						// TODO
+						assert(!"TODO");
 						p += 4;
 						break;
 					case 'C':	// I'm lazy...
@@ -162,7 +163,19 @@ void scanf(const char * fmt, ...)
 						break;
 					case 'S':	// I'm lazy...
 					case 's':
-						// TODO
+						s = *(char **)p;
+
+						while ((tmp = getchar()) == ' ' || tmp == '\n')
+							monitor_put(tmp);
+						ungetchar(tmp);
+
+						while ((tmp = getchar()) != ' ' && tmp != '\n') {
+							if (tmp == '\b') continue;
+							monitor_put(tmp);
+							*s++ = tmp;
+						}
+						*s = 0;
+
 						p += 4;
 						break;
 					default:
@@ -176,3 +189,27 @@ void scanf(const char * fmt, ...)
 _end:
 	return;
 }
+
+/********** readline **********/
+
+// CAUTION: <size> does NOT counts the terminal zero!
+void readline(char * buf, u32 size)
+{
+	char * p = buf;
+	while (p - buf < size) {
+		char ch = getchar();
+		if (ch == '\t') continue;	// ignore tab, or may cause problem
+		if (ch == '\b') {
+			if (p == buf) continue;
+			printf("\b \b");
+			p--;
+		}
+		else {
+			monitor_put(ch);
+			if (ch == '\n') break;
+			*p++ = ch;
+		}
+	}
+	*p = 0;
+}
+

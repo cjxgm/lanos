@@ -7,7 +7,7 @@ OBJ_BASE = base/boot.o \
 
 OBJ_VIDEO = video/monitor.o video/video.o
 
-OBJ_MISC = misc/common.o misc/stdio.o misc/assert.o
+OBJ_MISC = misc/common.o misc/stdio.o misc/assert.o misc/string.o
 
 OBJ_KEYBOARD = keyboard/keyboard.o keyboard/kb_queue.o
 

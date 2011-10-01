@@ -14,6 +14,7 @@
 
 void printf(const char * fmt, ...);
 void scanf (const char * fmt, ...);
+void readline(char * buf, u32 size);
 
 #endif
 
