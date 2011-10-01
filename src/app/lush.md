@@ -8,9 +8,9 @@ Supported commands
  * - help
  * \* cls
  * - echo
- * &nbsp;&nbsp;&nbsp;compile
- * &nbsp;&nbsp;&nbsp;run
- * &nbsp;&nbsp;&nbsp;halt
+ * &nbsp;&nbsp;compile
+ * &nbsp;&nbsp;run
+ * &nbsp;&nbsp;halt
 
 There may be other features.
 
