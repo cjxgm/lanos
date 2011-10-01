@@ -2,7 +2,7 @@
 #ifndef __STDIO__
 #define __STDIO__
 
-void printf(const char * fmt, ...);
+#include "keyboard.h"
 
 // colors
 // usage: printf("\e%c", R|G|B);
@@ -11,6 +11,9 @@ void printf(const char * fmt, ...);
 #define G			(1<<1)
 #define B			(1<<0)
 #define BG(CLR)		((CLR) << 4)
+
+void printf(const char * fmt, ...);
+void scanf (const char * fmt, ...);
 
 #endif
 

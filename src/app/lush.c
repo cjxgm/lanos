@@ -11,7 +11,11 @@ u8 app_lush(void)
 		while (!inkey(0x1C));	// wait for '\n' down
 		while (inkey(0x1C));	// wait for '\n' up
 		*/
-		while (getchar() != '\n');
+		while (1) {
+			char ch;
+			scanf("%c", &ch);
+			if (ch == '\n') break;
+		}
 	}
 	return 0;
 }

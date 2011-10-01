@@ -22,7 +22,9 @@ int main(struct mboot_info * mb_info)
 {
 	monitor_clear();
 
-	printf("\n\n\e%cWelcome to LANOS!\e%c\n\n", H|G, R|G|B);
+	printf("\n\n\e%cWelcome to LANOS!\n"
+		   "\e%cbuilt on %s at %s\e%c\n\n",
+		   H|G, H|G|B, __DATE__, __TIME__, R|G|B);
 
 	printf("\e%cmultiboot info: \e%c\n", H|B, R|G|B);
 	printf("flags	:	\e%c%bh\e%c (%Xh)\n",

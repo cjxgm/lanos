@@ -2,6 +2,9 @@
 #include "stdio.h"
 #include "monitor.h"
 #include "common.h"
+#include "assert.h"
+
+/********** printf **********/
 
 static void print_bin_32(u32 data);
 static void print_hex_32(u32 data);
@@ -119,3 +122,57 @@ void print_dec_s32(s32 data)
 	print_dec_u32(data);
 }
 
+/********** scanf **********/
+
+void scanf(const char * fmt, ...)
+{
+	const void * p = (void *)&fmt + 4;
+	char ch;
+	char tmp;
+
+	while ((ch = *fmt++)) {
+		switch (ch) {
+			case '%':
+				if ((ch = *fmt++) == 0)
+					goto _end;
+				switch (ch) {
+					case 'X':	// I'm lazy...
+					case 'x':
+					case 'P':
+					case 'p':
+						// TODO
+						p += 4;
+						break;
+					case 'D':	// I'm lazy...
+					case 'd':
+						// TODO
+						p += 4;
+						break;
+					case 'U':	// I'm lazy...
+					case 'u':
+						// TODO
+						p += 4;
+						break;
+					case 'C':	// I'm lazy...
+					case 'c':
+						tmp = getchar();
+						if (tmp != '\b') monitor_put(tmp);
+						**(char **)p = tmp;
+						p += 4;
+						break;
+					case 'S':	// I'm lazy...
+					case 's':
+						// TODO
+						p += 4;
+						break;
+					default:
+						assert(!"What did you fucking do to scanf??");
+				}
+				break;
+			default:
+				assert(!"What did you fucking do to scanf??");
+		}
+	}
+_end:
+	return;
+}
