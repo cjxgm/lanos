@@ -9,6 +9,12 @@ All the codes are licensed under GPLv2,<br>
 and all the artworks/documents are licensed under CC-BY-SA 3.0,<br>
 *ABSOLUTELY NO WARRANTY!*
 
+Screenshots
+------------------------------------------------------------
+Lanos on a real machine!<br>
+![](https://github.com/cjxgm/lanos/raw/master/screenshots/01.jpg)
+![](https://github.com/cjxgm/lanos/raw/master/screenshots/02.jpg)
+
 Introduction
 ------------------------------------------------------------
 This project is a sub project of cjsp (Clanjor Selfaction Project) -

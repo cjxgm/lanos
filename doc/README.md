@@ -7,6 +7,12 @@ Lanos 中文文档
 操作系统部分。<br>
 它使用 GRUB 来载入（主要）用 C 语言写成的内核。
 
+截图
+------------------------------------------------------------
+真机上的 Lanos！<br>
+![](https://github.com/cjxgm/lanos/raw/master/screenshots/01.jpg)
+![](https://github.com/cjxgm/lanos/raw/master/screenshots/02.jpg)
+
 简介
 ------------------------------------------------------------
 Lanos 是一个 32 位不全保护模式非 UNIX 克隆的操作系统
