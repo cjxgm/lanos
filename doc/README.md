@@ -13,6 +13,8 @@ Lanos 中文文档
 ![](https://github.com/cjxgm/lanos/raw/master/screenshots/01.jpg)
 ![](https://github.com/cjxgm/lanos/raw/master/screenshots/02.jpg)
 
+视频[在此](http://www.tudou.com/programs/view/usYXAXhisVw/)。
+
 简介
 ------------------------------------------------------------
 Lanos 是一个 32 位不全保护模式非 UNIX 克隆的操作系统

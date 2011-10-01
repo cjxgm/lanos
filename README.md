@@ -15,6 +15,8 @@ Lanos on a real machine!<br>
 ![](https://github.com/cjxgm/lanos/raw/master/screenshots/01.jpg)
 ![](https://github.com/cjxgm/lanos/raw/master/screenshots/02.jpg)
 
+And video [here](http://www.tudou.com/programs/view/usYXAXhisVw/).
+
 Introduction
 ------------------------------------------------------------
 This project is a sub project of cjsp (Clanjor Selfaction Project) -
