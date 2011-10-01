@@ -7,6 +7,7 @@ Supported commands
 
  * - help
  * \* cls
+ * \* hello
  * - echo
  * &nbsp;&nbsp;compile
  * &nbsp;&nbsp;run
