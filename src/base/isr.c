@@ -1,6 +1,6 @@
 
 #include "isr.h"
-#include "printf.h"
+#include "stdio.h"
 #include "assert.h"
 
 static const char * err_msgs[] = {

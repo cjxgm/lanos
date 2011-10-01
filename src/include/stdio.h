@@ -1,6 +1,6 @@
 
-#ifndef __PRINTF__
-#define __PRINTF__
+#ifndef __STDIO__
+#define __STDIO__
 
 void printf(const char * fmt, ...);
 

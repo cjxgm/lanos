@@ -1,7 +1,7 @@
 
 #include "common.h"
 #include "monitor.h"
-#include "printf.h"
+#include "stdio.h"
 #include "desc_table.h"
 #include "timer.h"
 #include "keyboard.h"
