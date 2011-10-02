@@ -3,7 +3,6 @@
 #include "stdio.h"
 #include "isr.h"
 #include "assert.h"
-#include "video.h"
 
 // in kb_queue.c
 void kb_queue_append (u8 key);
@@ -106,10 +105,6 @@ void keyboard_handler(regs_t regs)
 	// when press ESC, hang up the OS
 	assert(key != 0x01 && "system hangs up");
 
-	if (key == 0x3B) {	// F1
-		init_video();
-	}
-
 	if (key == 0xE0 || key == 0xE1)
 		return;		// can not proccess this now
 
@@ -118,12 +113,9 @@ void keyboard_handler(regs_t regs)
 
 	if (key == 0x2A || key == 0x36)		// shift
 		shift_pressed = key_down;
-	else if (key_down) {
-		// printf("%c", keymap[key*2 + shift_pressed]);
+	else if (key_down)
 		kb_queue_append(keymap[key*2 + shift_pressed]);
-	}
 
 	key_pressed[key] = key_down;
-
 }
 

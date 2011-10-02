@@ -23,7 +23,7 @@ SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_EMU86)		\
 		  main.o
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
-		  -fno-builtin -fno-stack-protector
+		  -fno-builtin -fno-stack-protector -D__DEBUG__
 LDFLAGS = -Tmisc/link.ld
 ASFLAGS = -felf
 

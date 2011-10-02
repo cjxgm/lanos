@@ -2,6 +2,7 @@
 #include "app/lush.h"
 #include "stdio.h"
 #include "string.h"
+#include "video.h"
 
 #define BUF_SIZE	255
 
@@ -22,6 +23,7 @@ u8 app_lush(void)
 			//   one more tab here .-v-. is a must.
 			printf("\tcls				clear screen\n");
 			printf("\thello			show \"Hello, world\"\n");
+			printf("\tvideo			run emu86 to execute int 10h\n");
 			printf("\techo			show arguments of it\n");
 		}
 
@@ -30,6 +32,9 @@ u8 app_lush(void)
 
 		else if ((t = startswith(buf, "hello")))
 			printf("Hello, world!\n");
+
+		else if ((t = startswith(buf, "video")))
+			init_video();
 
 		else if ((t = startswith(buf, "echo"))) {
 			p += t;
