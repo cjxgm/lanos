@@ -24,4 +24,3 @@ floppy.img: src/kernel grub.img
 	@sudo mount floppy.img -o loop mnt
 	@sudo cp src/kernel mnt/
 	@sudo umount mnt
-	@touch $@
