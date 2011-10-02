@@ -55,18 +55,21 @@ void emu86_execute(struct emu86_state * state)
 		switch ((op = *(u8 *)SEG2LN(CS(STATE), IP(STATE)))) {
 			/* execution end signature */
 			case 0xFF:
+				__(printf("\e\xe[emu86]: \e\x9halt\e\x7\n"));
 				return;
 
 				/* push/pop flags */
 			case 0x9C:
 			case 0x9D:
-				__(printf("\e\xe[emu86]: \e\x9%sf\e\xf\n",
+				__(printf("\e\xe[emu86]: \e\x9%sf	\e\x7",
 							(op & 1 ? "pop" : "push")));
 
 				if (op & 1)
 					FLAGS(STATE) = emu86_pop16(state);
 				else
 					emu86_push16(state, FLAGS(STATE));
+
+				__(printf("(%b)\n", FLAGS(STATE)));
 
 				break;
 
@@ -82,7 +85,7 @@ void emu86_execute(struct emu86_state * state)
 			default:
 				/* push/pop gp_reg */
 				if (op >= 0x50 && op < 0x60) {
-					__(printf("\e\xe[emu86]: \e\x9%s	\e\xf%s\n",
+					__(printf("\e\xe[emu86]: \e\x9%s	\e\xf%s ",
 								(CHECK_BIT(op, 3) ? "pop" : "push"),
 								gp_reg_name[op & 7]));
 
@@ -90,6 +93,8 @@ void emu86_execute(struct emu86_state * state)
 						state->gp[op & 7].a = emu86_pop16(state);
 					else
 						emu86_push16(state, state->gp[op & 7].a);
+
+					__(printf("(%X)\n", state->gp[op & 7].a));
 				}
 
 				/* unknown op */
