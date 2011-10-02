@@ -13,11 +13,14 @@ OBJ_KEYBOARD = keyboard/keyboard.o keyboard/kb_queue.o
 
 OBJ_APP = app/lush.o
 
+OBJ_EMU86 = emu86/emu86.o
+
 SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_VIDEO)		\
 		  $(OBJ_MISC)		\
 		  $(OBJ_KEYBOARD)	\
 		  $(OBJ_APP)		\
+		  $(OBJ_EMU86)		\
 		  main.o
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
 		  -fno-builtin -fno-stack-protector
