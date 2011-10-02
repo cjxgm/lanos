@@ -3,12 +3,14 @@
 #include "stdio.h"
 #include "string.h"
 
+#define BUF_SIZE	255
+
 u8 app_lush(void)
 {
-	char buf[256];
+	char buf[BUF_SIZE+1];
 	while (1) {
 		printf("\e%clush\e%c$ \e%c", H|G, H|R|G|B, R|G|B);
-		readline(buf, 256);
+		readline(buf, BUF_SIZE);
 
 		u32 t;
 		char * p = buf;
@@ -17,7 +19,8 @@ u8 app_lush(void)
 
 		else if ((t = startswith(buf, "help"))) {
 			printf("\thelp			show this help\n");
-			printf("\tcls			clear screen\n");
+			//   one more tab here .-v-. is a must.
+			printf("\tcls				clear screen\n");
 			printf("\thello			show \"Hello, world\"\n");
 			printf("\techo			show arguments of it\n");
 		}
