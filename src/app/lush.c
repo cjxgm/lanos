@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "video.h"
+#include "power.h"
 
 #define BUF_SIZE	255
 
@@ -23,8 +24,10 @@ u8 app_lush(void)
 			//   one more tab here .-v-. is a must.
 			printf("\tcls				clear screen\n");
 			printf("\thello			show \"Hello, world\"\n");
-			printf("\tvideo			run emu86 to execute int 10h\n");
 			printf("\techo			show arguments of it\n");
+			printf("\tvideo			run emu86 to execute int 10h\n");
+			printf("\treboot			reboot the computer\n");
+			printf("\thalt			shutdown the OS\n");
 		}
 
 		else if ((t = startswith(buf, "cls")))
@@ -33,14 +36,20 @@ u8 app_lush(void)
 		else if ((t = startswith(buf, "hello")))
 			printf("Hello, world!\n");
 
-		else if ((t = startswith(buf, "video")))
-			init_video();
-
 		else if ((t = startswith(buf, "echo"))) {
 			p += t;
 			if (*p) p++;
 			printf("%s\n", p);
 		}
+
+		else if ((t = startswith(buf, "video")))
+			init_video();
+
+		else if ((t = startswith(buf, "reboot")))
+			power_reboot();
+
+		else if ((t = startswith(buf, "halt")))
+			power_off();
 
 		else printf("\e%cUnknown command: \e%c%s\e%c\n",
 					H|R, H|R|B, buf, R|G|B);

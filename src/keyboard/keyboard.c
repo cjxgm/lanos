@@ -80,6 +80,10 @@ static u8 keymap[0x80 * 2] = {
 void init_keyboard(void)
 {
 	register_irq_handler(IRQ_KEYBOARD, &keyboard_handler);
+
+	// clear keyboard buffer
+	while (inb(0x64) & 2)
+		inb(0x60);
 }
 
 u8 inkey(u8 key)
@@ -101,9 +105,6 @@ void ungetchar(u8 ch)
 void keyboard_handler(regs_t regs)
 {
 	u8 key = inb(0x60);
-
-	// when press ESC, hang up the OS
-	assert(key != 0x01 && "system hangs up");
 
 	if (key == 0xE0 || key == 0xE1)
 		return;		// can not proccess this now
