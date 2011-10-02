@@ -196,7 +196,7 @@ _end:
 void readline(char * buf, u32 size)
 {
 	char * p = buf;
-	while (p - buf < size) {
+	while (1) {
 		char ch = getchar();
 		if (ch == '\t') continue;	// ignore tab, or may cause problem
 		if (ch == '\b') {
@@ -204,9 +204,12 @@ void readline(char * buf, u32 size)
 			printf("\b \b");
 			p--;
 		}
-		else {
+		else if (ch == '\n') {
 			monitor_put(ch);
-			if (ch == '\n') break;
+			break;
+		}
+		else if (p - buf < size){
+			monitor_put(ch);
 			*p++ = ch;
 		}
 	}
