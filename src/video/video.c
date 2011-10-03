@@ -13,7 +13,7 @@ void init_video(void)
 	IP(state) = 0;
 	SP(state).a = 0x100;
 	AX(state).a = 0x4F00;
-	emu86_int(&state, 0x10);
-	emu86_execute(&state);
+	emu86_int (&state, 0x10);
+	emu86_exec(&state);
 }
 

@@ -5,11 +5,8 @@
 #include "common.h"
 
 union reg16 {
-	struct {
-		u8	l;
-		u8	h;
-	} b;
 	u16 a;
+	u8  b[2];
 };
 
 struct emu86_state
@@ -21,11 +18,13 @@ struct emu86_state
 	u16 flags;
 };
 
-void emu86_int(struct emu86_state * state, u8 int_no);
+void emu86_int (struct emu86_state * state, u8  int_no);
 // execute until execution end signature (0xFF) appear.
-void emu86_execute(struct emu86_state * state);
-void emu86_push16(struct emu86_state * state, u16 data);
-u16  emu86_pop16 (struct emu86_state * state);
+void emu86_exec(struct emu86_state * state);
+void emu86_push(struct emu86_state * state, u16 data);
+u16  emu86_pop (struct emu86_state * state);
+// check condition codes
+u8   emu86_cond(struct emu86_state * state, u8  cond);
 
 #define SEG2LN(SEG,OFFSET)	(((SEG) << 4) + (OFFSET))
 
@@ -49,6 +48,12 @@ u16  emu86_pop16 (struct emu86_state * state);
 
 #define IP(S)		((S).ip)
 #define FLAGS(S)	((S).flags)
+
+#define FLAG_CF_BIT		0
+#define FLAG_PF_BIT		2
+#define FLAG_ZF_BIT		6
+#define FLAG_SF_BIT		7
+#define FLAG_OF_BIT		11
 
 #endif
 
