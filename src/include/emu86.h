@@ -19,7 +19,7 @@ struct emu86_state
 };
 
 void emu86_int (struct emu86_state * state, u8  int_no);
-// execute until execution end signature (0xFF) appear.
+// execute until hlt(0xF4) appear.
 void emu86_exec(struct emu86_state * state);
 void emu86_push(struct emu86_state * state, u16 data);
 u16  emu86_pop (struct emu86_state * state);

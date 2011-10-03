@@ -27,7 +27,7 @@ u8 app_lush(void)
 			printf("\techo			show arguments of it\n");
 			printf("\tvideo			run emu86 to execute int 10h\n");
 			printf("\treboot			reboot the computer\n");
-			printf("\thalt			shutdown the OS\n");
+			printf("\tpoweroff		shutdown the OS\n");
 		}
 
 		else if ((t = startswith(buf, "cls")))
@@ -46,10 +46,10 @@ u8 app_lush(void)
 			init_video();
 
 		else if ((t = startswith(buf, "reboot")))
-			power_reboot();
+			reboot();
 
-		else if ((t = startswith(buf, "halt")))
-			power_off();
+		else if ((t = startswith(buf, "poweroff")))
+			poweroff();
 
 		else printf("\e%cUnknown command: \e%c%s\e%c\n",
 					H|R, H|R|B, buf, R|G|B);

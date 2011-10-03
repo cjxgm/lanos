@@ -3,12 +3,13 @@
 #include "common.h"
 #include "assert.h"
 
-void power_off(void)
+void poweroff(void)
 {
 	assert(!"You can shutdown the computer safely.");
+	// TODO
 }
 
-void power_reboot(void)
+void reboot(void)
 {
 	// clear keyboard buffer
 	while (inb(0x64) & 2)

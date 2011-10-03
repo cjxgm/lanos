@@ -6,7 +6,7 @@ static struct emu86_state state;
 
 void init_video(void)
 {
-	*(u8 *)0x7c00 = 0xFF;	// execution end signature
+	*(u8 *)0x7c00 = 0xF4;	// hlt
 	CS(state) = 0x07c0;
 	DS(state) = 0x07c0;
 	SS(state) = 0x07c0;

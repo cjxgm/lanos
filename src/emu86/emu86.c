@@ -46,7 +46,7 @@ void emu86_int(struct emu86_state * state, u8 int_no)
 	  );
 }
 
-// return when get instruction 0xFF.
+// return when get instruction hlt(0xF4).
 void emu86_exec(struct emu86_state * state)
 {
 	__(u8  cnt = 0);
@@ -63,9 +63,9 @@ void emu86_exec(struct emu86_state * state)
 		IP(STATE)++;
 
 		switch (op) {
-			/* execution end signature */
-			case 0xFF:
-				__(printf("\e\xe[emu86]: \e\x9halt\e\x7\n"));
+			/* hlt */
+			case 0xF4:
+				__(printf("\e\xe[emu86]: \e\x9hlt\e\x7\n"));
 				return;
 
 				/* push/pop flags */
