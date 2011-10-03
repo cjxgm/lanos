@@ -14,7 +14,7 @@ OBJ_KEYBOARD = keyboard/keyboard.o keyboard/kb_queue.o
 
 OBJ_APP = app/lush.o
 
-OBJ_EMU86 = emu86/emu86.o
+OBJ_EMU86 = emu86/emu86.o emu86/emu86_do.o
 
 SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_VIDEO)		\

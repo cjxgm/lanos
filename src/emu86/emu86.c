@@ -52,12 +52,14 @@ void emu86_exec(struct emu86_state * state)
 	__(u8  cnt = 0);
 	u8  op;
 	s16 tmp_s16;
+	u16 tmp_u16;
 	s8  tmp_s8;
+	u8  tmp_u8;
 
 	while (1) {
 		op = *(u8 *)SEG2LN(CS(STATE), IP(STATE));
 		__(
-				printf("\e\x7%X:%X ", CS(STATE), IP(STATE));
+				// printf("\e\x7%X:%X ", CS(STATE), IP(STATE));
 				cnt = (cnt + 1) & 0x0F;
 		  );
 		IP(STATE)++;
@@ -114,9 +116,63 @@ void emu86_exec(struct emu86_state * state)
 				IP(STATE) += tmp_s8;
 				break;
 
+				/* cmp al, byte */
+			case 0x3C:
+				tmp_u8 = *(u8 *)SEG2LN(CS(STATE), IP(STATE));
+				__(printf("\e\xe[emu86]: \e\x9"
+							"cmp	\e\xf""al, %X\n",
+							tmp_u8));
+				IP(STATE)++;
+				emu86_cmp(state, AX(STATE).b[0], tmp_u8);
+				break;
+
+				/* cmp [abcd][lh], byte */
+			case 0x80:
+				IP(STATE)++;
+				op = *(u8 *)SEG2LN(CS(STATE), IP(STATE));
+
+				/* cmp [abcd][lh], byte */
+				if (op >> 3 == 0x1F) {
+					tmp_u8 = *(u8 *)SEG2LN(CS(STATE), IP(STATE));
+					__(printf("\e\xe[emu86]: \e\x9"
+								"cmp	\e\xf%s\b%c, %X\n",
+								((op >> 2) & 1 ? 'h' : 'l'), tmp_u8));
+					IP(STATE)++;
+					emu86_cmp(state,
+							state->gp[op & 3].b[(op >> 2) & 1],
+							tmp_u8);
+					break;
+				} 
+				else {
+					__(printf("\e\xe[emu86]: \e\xcunknown opcode "
+								"prefixed 0x80: \e\xf%X\n", op));
+					IP(STATE)++;
+				}
+
+				/* cmp [abcd]x, byte */
+			case 0x83:
+				IP(STATE)++;
+				op = *(u8 *)SEG2LN(CS(STATE), IP(STATE));
+
+				/* cmp [abcd]x, byte */
+				if (op >> 3 == 0x1F) {
+					tmp_u16 = *(u16 *)SEG2LN(CS(STATE), IP(STATE));
+					__(printf("\e\xe[emu86]: \e\x9"
+								"cmp	\e\xf%s, %X\n",
+								tmp_u16));
+					IP(STATE)++;
+					emu86_cmp(state, state->gp[op & 7].a, tmp_u16);
+					break;
+				} 
+				else {
+					__(printf("\e\xe[emu86]: \e\xcunknown opcode "
+								"prefixed 0x83: \e\xf%X\n", op));
+					IP(STATE)++;
+				}
+
 			default:
 				/* push/pop gp_reg */
-				if (op >= 0x50 && op < 0x60) {
+				if (op >> 4 == 5) {
 					__(printf("\e\xe[emu86]: \e\x9%s	\e\xf%s ",
 								(CHECK_BIT(op, 3) ? "pop" : "push"),
 								gp_reg_name[op & 7]));
@@ -204,5 +260,10 @@ u8 emu86_cond(struct emu86_state * state, u8 cond)
 
 	if (cond & 1) result = !result;
 	return result;
+}
+
+void emu86_cmp(struct emu86_state * state, u16 a, u16 b)
+{
+	FLAGS(STATE) = emu86_do_cmp(a, b) & 0xFFFF;
 }
 

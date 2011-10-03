@@ -4,27 +4,17 @@
 
 #include "common.h"
 
-union reg16 {
-	u16 a;
-	u8  b[2];
-};
-
 struct emu86_state
 {
-	union reg16 gp[8];	// general purpose registers
+	union {
+		u16 a;
+		u8  b[2];
+	} gp[8];	// general purpose registers
 	u16 seg[4];			// segment registers
 
 	u16 ip;
 	u16 flags;
 };
-
-void emu86_int (struct emu86_state * state, u8  int_no);
-// execute until hlt(0xF4) appear.
-void emu86_exec(struct emu86_state * state);
-void emu86_push(struct emu86_state * state, u16 data);
-u16  emu86_pop (struct emu86_state * state);
-// check condition codes
-u8   emu86_cond(struct emu86_state * state, u8  cond);
 
 #define SEG2LN(SEG,OFFSET)	(((SEG) << 4) + (OFFSET))
 
@@ -54,6 +44,20 @@ u8   emu86_cond(struct emu86_state * state, u8  cond);
 #define FLAG_ZF_BIT		6
 #define FLAG_SF_BIT		7
 #define FLAG_OF_BIT		11
+
+/* in emu86.c */
+void emu86_int (struct emu86_state * state, u8  int_no);
+// execute until hlt(0xF4) appear.
+void emu86_exec(struct emu86_state * state);
+void emu86_push(struct emu86_state * state, u16 data);
+u16  emu86_pop (struct emu86_state * state);
+// check condition codes
+u8   emu86_cond(struct emu86_state * state, u8  cond);
+void emu86_cmp (struct emu86_state * state, u16 a, u16 b);
+
+/* in emu86_do.s */
+// cmp a and b, returning eflags
+u32 emu86_do_cmp(u32 a, u32 b);
 
 #endif
 
