@@ -126,7 +126,7 @@ void emu86_exec(struct emu86_state * state)
 				emu86_cmp(state, AX(STATE).b[0], tmp_u8);
 				break;
 
-				/* cmp [abcd][lh], byte */
+				/* byte level */
 			case 0x80:
 				IP(STATE)++;
 				op = *(u8 *)SEG2LN(CS(STATE), IP(STATE));
@@ -143,6 +143,14 @@ void emu86_exec(struct emu86_state * state)
 							tmp_u8);
 					break;
 				} 
+
+				/* add byte[effective addr], byte */
+				else if (op >= 0 && op < 6) {
+					*(s8 *) emu86_eff_addr(state, op)
+						+= *(s8 *)SEG2LN(CS(STATE), IP(STATE));
+					IP(STATE)++;
+				}
+
 				else {
 					__(printf("\e\xe[emu86]: \e\xcunknown opcode "
 								"prefixed 0x80: \e\xf%X\n", op));
@@ -265,5 +273,15 @@ u8 emu86_cond(struct emu86_state * state, u8 cond)
 void emu86_cmp(struct emu86_state * state, u16 a, u16 b)
 {
 	FLAGS(STATE) = emu86_do_cmp(a, b) & 0xFFFF;
+}
+
+u32 emu86_eff_addr(struct emu86_state * state, u8 eff_addr)
+{
+	assert(eff_addr >= 0 && eff_addr < 6);
+
+	u32 addr = (eff_addr & 2 ? BP(STATE).a
+			: (eff_addr & 4 ? 0 : BP(STATE).a));
+	addr += (eff_addr & 1 ? DI(STATE).a : SI(STATE).a);
+	return addr;
 }
 

@@ -54,10 +54,12 @@ u16  emu86_pop (struct emu86_state * state);
 // check condition codes
 u8   emu86_cond(struct emu86_state * state, u8  cond);
 void emu86_cmp (struct emu86_state * state, u16 a, u16 b);
+// parse effective address, return the address.
+u32  emu86_eff_addr(struct emu86_state * state, u8 eff_addr);
 
 /* in emu86_do.s */
-// cmp a and b, returning eflags
-u32 emu86_do_cmp(u32 a, u32 b);
+// cmp a and b, returning flags
+u16 emu86_do_cmp(u16 a, u16 b);
 
 #endif
 
