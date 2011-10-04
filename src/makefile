@@ -14,9 +14,11 @@ OBJ_MISC = misc/common.o misc/stdio.o misc/assert.o \
 
 OBJ_KEYBOARD = keyboard/keyboard.o keyboard/kb_queue.o
 
-OBJ_APP = app/lush.o
+OBJ_APP = app/lush.o app/anim.o
 
 OBJ_EMU86 = emu86/emu86.o emu86/emu86_do.o
+
+OBJ_MATH = math/sqrt.o
 
 SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_VIDEO)		\
@@ -24,6 +26,7 @@ SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_KEYBOARD)	\
 		  $(OBJ_APP)		\
 		  $(OBJ_EMU86)		\
+		  $(OBJ_MATH)		\
 		  main.o
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
 		  -fno-builtin -fno-stack-protector -D__DEBUG__

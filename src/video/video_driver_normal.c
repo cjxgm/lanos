@@ -1,6 +1,7 @@
 
 #include "video_driver.h"
 #include "assert.h"
+#include "math.h"
 
 VIDEO_DRIVER_INTERFACE(normal);
 
@@ -78,14 +79,20 @@ void putpixel(u32 x, u32 y, u32 color)
 	float r = (float)clr[1] / 255.0f;
 	float g = (float)clr[2] / 255.0f;
 	float b = (float)clr[3] / 255.0f;
+	float brightness = sqrt(0.241f * r * r
+			+ 0.691f * g * g
+			+ 0.068f * b * b);
 
-	// FIXME: the fucking way
+	char br_hi[] = "00011";
+	char br_ch[] = "-=#=#";
+
 	u16 t = 0;
-	t |= (b > 0.5f) << 0;
-	t |= (g > 0.5f) << 1;
-	t |= (r > 0.5f) << 2;
-	t |= (r > 0.9f || g > 0.9f || b > 0.9f) << 3;
-	t = (t << 8) | '#';
+	t |= (b > 0.2f) << 0;
+	t |= (g > 0.2f) << 1;
+	t |= (r > 0.2f) << 2;
+	t |= (br_hi[(int)(brightness * (sizeof(br_hi) - 1))] - '0') << 3;
+	t <<= 8;
+	t |= br_ch[(int)(brightness * (sizeof(br_ch) - 1))];
 
 	putchar(t, x, y);
 }

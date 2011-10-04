@@ -1,10 +1,8 @@
 
-#include "app/lush.h"
-#include "video_driver.h"
+#include "app.h"
 #include "stdio.h"
 #include "string.h"
 #include "power.h"
-#include "timer.h"
 #include "assert.h"
 
 #define BUF_SIZE	255
@@ -28,6 +26,7 @@ u8 app_lush(void)
 			printf("\thello			show \"Hello, world\"\n");
 			printf("\techo			show arguments of it\n");
 			printf("\tvideo			run emu86 to execute int 10h\n");
+			printf("\tanim			draw an animation (ESC to quit)\n");
 			printf("\treboot			reboot the computer\n");
 			printf("\tpoweroff		shutdown the OS\n");
 		}
@@ -49,26 +48,8 @@ u8 app_lush(void)
 			assert(!"TODO");
 		}
 
-		else if ((t = startswith(buf, "draw"))) {
-			u32 map[4*4];
-			int x, y;
-
-			while (!inkey(0x01)) {
-				for (y=0; y<4; y++)
-					for (x=0; x<4; x++)
-						map[y*4+x] = (x * 255 / 4)
-									| ((y * 255 / 4) << 16);
-
-				// draw to screen
-				for (y=0; y<4; y++)
-					for (x=0; x<4; x++)
-						get_video_driver(0)->putpixel(x, y, map[y*4+x]);
-
-				// wait
-				u32 t = get_ticks();
-				while ((get_ticks() - t) * 1000 / TICKS_PER_SEC < 34);
-			}
-		}
+		else if ((t = startswith(buf, "anim")))
+			app_anim();
 
 		else if ((t = startswith(buf, "reboot")))
 			reboot();
@@ -77,7 +58,7 @@ u8 app_lush(void)
 			poweroff();
 
 		else printf("\e%cUnknown command: \e%c%s\e%c\n",
-					H|R, H|R|B, buf, R|G|B);
+				H|R, H|R|B, buf, R|G|B);
 	}
 	return 0;
 }

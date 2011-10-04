@@ -5,7 +5,7 @@
 #include "desc_table.h"
 #include "timer.h"
 #include "keyboard.h"
-#include "app/lush.h"
+#include "app.h"
 
 struct mboot_info
 {
