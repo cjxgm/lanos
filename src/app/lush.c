@@ -1,9 +1,11 @@
 
 #include "app/lush.h"
+#include "video_driver.h"
 #include "stdio.h"
 #include "string.h"
-#include "video.h"
 #include "power.h"
+#include "timer.h"
+#include "assert.h"
 
 #define BUF_SIZE	255
 
@@ -42,8 +44,31 @@ u8 app_lush(void)
 			printf("%s\n", p);
 		}
 
-		else if ((t = startswith(buf, "video")))
-			init_video();
+		else if ((t = startswith(buf, "video"))) {
+			//init_video();
+			assert(!"TODO");
+		}
+
+		else if ((t = startswith(buf, "draw"))) {
+			u32 map[4*4];
+			int x, y;
+
+			while (!inkey(0x01)) {
+				for (y=0; y<4; y++)
+					for (x=0; x<4; x++)
+						map[y*4+x] = (x * 255 / 4)
+									| ((y * 255 / 4) << 16);
+
+				// draw to screen
+				for (y=0; y<4; y++)
+					for (x=0; x<4; x++)
+						get_video_driver(0)->putpixel(x, y, map[y*4+x]);
+
+				// wait
+				u32 t = get_ticks();
+				while ((get_ticks() - t) * 1000 / TICKS_PER_SEC < 34);
+			}
+		}
 
 		else if ((t = startswith(buf, "reboot")))
 			reboot();

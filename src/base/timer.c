@@ -9,12 +9,6 @@ static u32 ticks = 0;
 static void timer_cb(regs_t regs)
 {
 	ticks++;
-	u8 x, y;
-	monitor_get_cursor_pos(&x, &y);
-	monitor_set_cursor_pos(0, 0);
-	printf("\031\e%crunning \e%c%d\e%cs\n",
-			H|R|B, H|R|G|B, ticks / TICKS_PER_SEC, R|G|B);
-	monitor_set_cursor_pos(x, y);
 }
 
 void init_timer(void)

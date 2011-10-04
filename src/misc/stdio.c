@@ -1,7 +1,5 @@
 
 #include "stdio.h"
-#include "monitor.h"
-#include "common.h"
 #include "assert.h"
 
 /********** printf **********/
@@ -48,22 +46,22 @@ void printf(const char * fmt, ...)
 						break;
 					case 'C':	// I'm lazy...
 					case 'c':
-						monitor_put(*(char *)p);
+						putchar(*(char *)p);
 						p += 4;
 						break;
 					case 'S':	// I'm lazy...
 					case 's':
 						tmp = *(char **)p;
 						while (*tmp)
-							monitor_put(*tmp++);
+							putchar(*tmp++);
 						p += 4;
 						break;
 					default:
-						monitor_put(ch);
+						putchar(ch);
 				}
 				break;
 			default:
-				monitor_put(ch);
+				putchar(ch);
 		}
 	}
 _end:
@@ -74,7 +72,7 @@ void print_bin_32(u32 data)
 {
 	int i;
 	for (i=31; i>=0; i--)
-		monitor_put('0' + ((data >> i) & 1));
+		putchar('0' + ((data >> i) & 1));
 }
 
 void print_hex_32(u32 data)
@@ -88,14 +86,14 @@ void print_hex_8(u8 data)
 {
 	static const char hex_digits[] = "0123456789ABCDEF";
 
-	monitor_put(hex_digits[data >> 4]);
-	monitor_put(hex_digits[data & 0xF]);
+	putchar(hex_digits[data >> 4]);
+	putchar(hex_digits[data & 0xF]);
 }
 
 void print_dec_u32(u32 data)
 {
 	if (!data) {
-		monitor_put('0');
+		putchar('0');
 		return;
 	}
 
@@ -110,13 +108,13 @@ void print_dec_u32(u32 data)
 	}
 
 	while (*--p)
-		monitor_put(*p);
+		putchar(*p);
 }
 
 void print_dec_s32(s32 data)
 {
 	if (data < 0) {
-		monitor_put('-');
+		putchar('-');
 		data = -data;
 	}
 	print_dec_u32(data);
@@ -157,7 +155,7 @@ void scanf(const char * fmt, ...)
 					case 'C':	// I'm lazy...
 					case 'c':
 						tmp = getchar();
-						if (tmp != '\b') monitor_put(tmp);
+						if (tmp != '\b') putchar(tmp);
 						**(char **)p = tmp;
 						p += 4;
 						break;
@@ -166,12 +164,12 @@ void scanf(const char * fmt, ...)
 						s = *(char **)p;
 
 						while ((tmp = getchar()) == ' ' || tmp == '\n')
-							monitor_put(tmp);
+							putchar(tmp);
 						ungetchar(tmp);
 
 						while ((tmp = getchar()) != ' ' && tmp != '\n') {
 							if (tmp == '\b') continue;
-							monitor_put(tmp);
+							putchar(tmp);
 							*s++ = tmp;
 						}
 						*s = 0;
@@ -205,11 +203,11 @@ void readline(char * buf, u32 size)
 			p--;
 		}
 		else if (ch == '\n') {
-			monitor_put(ch);
+			putchar(ch);
 			break;
 		}
 		else if (p - buf < size){
-			monitor_put(ch);
+			putchar(ch);
 			*p++ = ch;
 		}
 	}

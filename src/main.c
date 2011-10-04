@@ -20,7 +20,8 @@ struct mboot_info
 
 int main(struct mboot_info * mb_info)
 {
-	monitor_clear();
+	select_video_driver();
+	clear_screen();
 
 	printf("\n\n\e%cWelcome to LANOS!\n"
 		   "\e%cbuilt on %s at %s\e%c\n\n",

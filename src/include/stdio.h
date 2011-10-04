@@ -2,7 +2,9 @@
 #ifndef __STDIO__
 #define __STDIO__
 
+#include "common.h"
 #include "keyboard.h"
+#include "monitor.h"
 
 // colors
 // usage: printf("\e%c", R|G|B);
