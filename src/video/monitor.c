@@ -43,8 +43,10 @@ void putchar(char ch)
 		return;
 	}
 
-	if (ch == '\032')	// \032, clear whole screen
+	if (ch == '\032') {	// \032, clear whole screen
 		clear_screen();
+		cursor_x = cursor_y = 0;
+	}
 
 	else if (ch == '\031') {	// \031, clear current line
 		int i;

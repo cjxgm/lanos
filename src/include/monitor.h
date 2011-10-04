@@ -5,8 +5,8 @@
 #include "common.h"
 
 void select_video_driver(void);
-void putchar(char ch);
 void clear_screen(void);
+void putchar(char ch);
 void get_cursor_pos(u32 * x, u32 * y);
 void set_cursor_pos(u32   x, u32   y);
 

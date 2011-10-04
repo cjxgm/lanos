@@ -28,24 +28,24 @@ struct video_driver
 struct video_driver * get_video_driver(u32 id);
 
 #define VIDEO_DRIVER_INTERFACE(NAME) \
-	static u8   init(void);\
-	static void free(void);\
-	static void get_resolution(u32 * w, u32 * h);\
-	static void set_cursor_pos(u32 x, u32 y);\
-	static void get_cursor_pos(u32 * x, u32 * y);\
-	static void putchar(u16 ch_with_attr, u32 x, u32 y);\
-	static u16  getchar(u32 x, u32 y);\
-	static void putpixel(u32 x, u32 y, u32 color);\
+	static u8   _init(void);\
+	static void _free(void);\
+	static void _get_resolution(u32 * w, u32 * h);\
+	static void _set_cursor_pos(u32 x, u32 y);\
+	static void _get_cursor_pos(u32 * x, u32 * y);\
+	static void _putchar(u16 ch_with_attr, u32 x, u32 y);\
+	static u16  _getchar(u32 x, u32 y);\
+	static void _putpixel(u32 x, u32 y, u32 color);\
 	struct video_driver video_driver_ ## NAME = {\
 		.name = #NAME,\
-		.init = &init,\
-		.free = &free,\
-		.get_resolution = &get_resolution,\
-		.set_cursor_pos = &set_cursor_pos,\
-		.get_cursor_pos = &get_cursor_pos,\
-		.putchar = &putchar,\
-		.getchar = &getchar,\
-		.putpixel = &putpixel,\
+		.init = &_init,\
+		.free = &_free,\
+		.get_resolution = &_get_resolution,\
+		.set_cursor_pos = &_set_cursor_pos,\
+		.get_cursor_pos = &_get_cursor_pos,\
+		.putchar = &_putchar,\
+		.getchar = &_getchar,\
+		.putpixel = &_putpixel,\
 	};
 
 #endif

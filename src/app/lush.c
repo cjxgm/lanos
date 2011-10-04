@@ -32,7 +32,7 @@ u8 app_lush(void)
 		}
 
 		else if ((t = startswith(buf, "cls")))
-			printf("\032\n");	// '\n' skips the first timing line.
+			printf("\032");
 
 		else if ((t = startswith(buf, "hello")))
 			printf("Hello, world!\n");

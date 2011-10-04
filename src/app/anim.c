@@ -1,47 +1,45 @@
 
 #include "app.h"
 #include "video_driver.h"
+#include "monitor.h"
 #include "keyboard.h"
 #include "timer.h"
 #include "assert.h"
 #include "math.h"
 
-#define MAP_W	60
-#define MAP_H	20
-
 u8 app_anim(void)
 {
-	u8 map[MAP_W*MAP_H][4];
-	int x, y;
+	u32 w, h;
+	get_video_driver(0)->get_resolution(&w, &h);
 
-	float cx = 0.0f;
-	float cy = 0.0f;
+	s8 d = 1;
+	s16 contrast = 0;
 
 	while (!inkey(0x01)) {
-
-		for (y=0; y<MAP_H; y++)
-			for (x=0; x<MAP_W; x++) {
-				float d = sqrt((x-cx)*(x-cx) + (y-cy)*(y-cy));
-				map[y*MAP_W+x][1] = 255 - d * 255 / MAP_W;
-				map[y*MAP_W+x][2] = d * 255 / MAP_H;
-			}
-
+		contrast += d*4;
 		// draw to screen
-		for (y=0; y<MAP_H; y++)
-			for (x=0; x<MAP_W; x++)
-				get_video_driver(0)->putpixel(x, y,
-						*(u32 *)map[y*MAP_W+x]);
+		u8 cx = w >> 1;
+		u8 cy = h >> 1;
+		int x, y;
+		for (y=0; y<h; y++) {
+			for (x=0; x<w; x++) {
+				s32 clr = sqrt((x-cx)*(x-cx)/4 + (y-cy)*(y-cy)) * 255 / h * 2;
+				clr = 255 - clr;
+				if (clr < 0) clr = 0;
+				clr = clr * contrast / 255;
+				clr = clr << 16;
+				get_video_driver(0)->putpixel(x, y, clr);
+			}
+		}
+
+		if (d == 1 && contrast >= 0xFF) d = -1;
+		if (d == -1 && contrast <= 0) d = 1;
 
 		// wait
 		u32 t = get_ticks();
-		while ((get_ticks() - t) * 1000 / TICKS_PER_SEC < 34);
-
-		// calculate
-		cx += 0.6;
-		cy += 0.4;
-		if (cx > MAP_W) cx = 0;
-		if (cy > MAP_H) cy = 0;
+		while ((get_ticks() - t) * 1000 / TICKS_PER_SEC < 10);
 	}
 
+	clear_screen();
 	return 0;
 }
