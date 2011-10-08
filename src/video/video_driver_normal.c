@@ -97,8 +97,8 @@ void _putpixel(u32 x, u32 y, u32 color)
 
 	u8 br_ch[] = " ..--==%*1IL&VG#@%*1IL&VG#@";
 	u8 br_hi[] = "000000000000000001111111111";
-	u8 ch = br_ch[(int)(brightness * (sizeof(br_ch) - 1))];
-	u16 hi = br_hi[(int)(brightness * (sizeof(br_hi) - 1))] - '0';
+	u8 ch = br_ch[(int)(brightness * (sizeof(br_ch) - 2))];
+	u16 hi = br_hi[(int)(brightness * (sizeof(br_hi) - 2))] - '0';
 	hi = ((hi << 3)
 		| ((clr[0]>0) << 2)
 		| ((clr[1]>0) << 1)

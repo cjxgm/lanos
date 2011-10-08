@@ -25,10 +25,9 @@ int init(struct mboot_info * mb_info)
 	init_idt();
 	init_timer();
 	init_keyboard();
+	init_monitor();
 
-	select_video_driver();
 	clear_screen();
-
 	printf("\n\n\e%cWelcome to lanos %s\n"
 		   "\e%cbuilt on %s at %s\e%c\n\n",
 		   H|G, LANOS_VERSION, H|G|B, __DATE__, __TIME__, R|G|B);

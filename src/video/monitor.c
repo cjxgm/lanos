@@ -6,7 +6,7 @@
 static struct video_driver * vid_drv = NULL;
 static u8 out_mode = 0;
 
-void select_video_driver(void)
+void init_monitor(void)
 {
 	struct video_driver * drv;
 	int i = 1;
@@ -95,6 +95,21 @@ void putchar(char ch)
 	}
 
 	set_cursor_pos(cursor_x, cursor_y);
+}
+
+void putpixel(u32 x, u32 y, u32 color)
+{
+	vid_drv->putpixel(x, y, color);
+}
+
+void get_text_resolution(u32 * w, u32 * h)
+{
+	vid_drv->get_text_resolution(w, h);
+}
+
+void get_pixel_resolution(u32 * w, u32 * h)
+{
+	vid_drv->get_pixel_resolution(w, h);
 }
 
 void clear_screen(void)
