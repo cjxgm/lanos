@@ -2,8 +2,6 @@
 #include "video_driver.h"
 #include "assert.h"
 #include "math.h"
-#define __NO_MONITOR_CURSOR_OP__
-#include "stdio.h"
 
 VIDEO_DRIVER_INTERFACE(normal);
 
@@ -20,7 +18,13 @@ void _free(void)
 {
 }
 
-void _get_resolution(u32 * w, u32 * h)
+void _get_text_resolution(u32 * w, u32 * h)
+{
+	*w = 80;
+	*h = 25;
+}
+
+void _get_pixel_resolution(u32 * w, u32 * h)
 {
 	*w = 80;
 	*h = 25;
@@ -29,10 +33,10 @@ void _get_resolution(u32 * w, u32 * h)
 void _set_cursor_pos(u32 x, u32 y)
 {
 	u32 w, h;
-	_get_resolution(&w, &h);
+	_get_text_resolution(&w, &h);
 
-	cursor_x = x;
-	cursor_y = y;
+	cursor_x = (x<w ? x : w-1);
+	cursor_y = (y<h ? y : h-1);
 
 	u16 cursor_pos = cursor_y * w + cursor_x;
 
@@ -56,21 +60,25 @@ void _get_cursor_pos(u32 * x, u32 * y)
 void _putchar(u16 ch_with_attr, u32 x, u32 y)
 {
 	u32 w, h;
-	_get_resolution(&w, &h);
-	vid_mem[y * w + x] = ch_with_attr;
+	_get_text_resolution(&w, &h);
+
+	if (x >= w || y >= h) return;
+	vid_mem[y*w + x] = ch_with_attr;
 }
 
 u16 _getchar(u32 x, u32 y)
 {
 	u32 w, h;
-	_get_resolution(&w, &h);
-	return vid_mem[y * w + x];
+	_get_text_resolution(&w, &h);
+
+	if (x >= w || y >= h) return 0;
+	return vid_mem[y*w + x];
 }
 
 void _putpixel(u32 x, u32 y, u32 color)
 {
 	u32 w, h;
-	_get_resolution(&w, &h);
+	_get_pixel_resolution(&w, &h);
 
 	if (x >= w || y >= h) return;
 

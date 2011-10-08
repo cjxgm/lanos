@@ -1,8 +1,6 @@
 
 #include "timer.h"
 #include "isr.h"
-#include "stdio.h"
-#include "monitor.h"
 
 static u32 ticks = 0;
 

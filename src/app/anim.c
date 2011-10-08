@@ -10,12 +10,12 @@
 u8 app_anim(void)
 {
 	u32 w, h;
-	get_video_driver(0)->get_resolution(&w, &h);
+	get_video_driver(0)->get_pixel_resolution(&w, &h);
 
 	s8 d = 1;
 	s16 contrast = 0;
 
-	while (!inkey(0x01)) {
+	while (!inkey(0x01)) {	// 0x01 --> ESC
 		contrast += d*4;
 		// draw to screen
 		u8 cx = w >> 1;

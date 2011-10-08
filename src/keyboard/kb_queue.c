@@ -11,6 +11,7 @@ static u8   cnt  = 0;
 
 void kb_queue_append(u8 key)
 {
+	if (!key) return;
 	if (cnt == KB_QUEUE_SIZE) return;
 
 	*tail++ = key;
@@ -21,6 +22,7 @@ void kb_queue_append(u8 key)
 
 void kb_queue_prepend(u8 key)
 {
+	if (!key) return;
 	if (cnt == KB_QUEUE_SIZE) return;
 
 	if (--head < kb_queue)

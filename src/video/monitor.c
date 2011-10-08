@@ -8,17 +8,18 @@ static u8 out_mode = 0;
 
 void select_video_driver(void)
 {
-	int i = 0;
 	struct video_driver * drv;
+	int i = 1;
 
 	while ((drv = get_video_driver(i++))) {
 		if (drv->init())	// initialize failed
 			continue;
 		vid_drv = drv;
-		break;
+		return;
 	}
 
-	if (!vid_drv) reboot();
+	if (!vid_drv)
+		vid_drv = get_video_driver(0);
 }
 
 void putchar(char ch)
@@ -30,7 +31,7 @@ void putchar(char ch)
 	get_cursor_pos(&cursor_x, &cursor_y);
 
 	u32 w, h;
-	vid_drv->get_resolution(&w, &h);
+	vid_drv->get_text_resolution(&w, &h);
 
 	// You can change attribute by using "\e\x??"
 	if (out_mode == 1) {
@@ -99,7 +100,7 @@ void putchar(char ch)
 void clear_screen(void)
 {
 	u32 w, h;
-	vid_drv->get_resolution(&w, &h);
+	vid_drv->get_text_resolution(&w, &h);
 
 	int x, y;
 	for (y=0; y<h; y++)

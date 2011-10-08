@@ -31,6 +31,7 @@ mboot_address_field:
 	dd start				; kernel entry point (initial EIP).
 
 [global start]				; kernel entry point.
+[global boot_fail]
 [extern init]				; in init.c
 
 start:
@@ -41,4 +42,18 @@ start:
 	call	init
 
 	jmp		$				; loop forever
+
+; When boot progress failed before video driver initialized, 
+; call this routine. (That means, it crashes!)
+boot_fail:
+	cli
+
+	; show a red screen
+	mov		al, ' '
+	mov		ah, 11000000b
+	mov		edi, 0b8000h
+	mov		ecx, 80*25
+	rep		stosw
+
+	jmp		$
 

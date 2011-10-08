@@ -9,6 +9,7 @@ static struct emu86_state state;
 
 u8 _init(void)
 {
+	return 1;	// failed
 	// TODO
 	*(u8 *)0x7c00 = 0xF4;	// hlt
 	CS(state) = 0x07c0;
@@ -20,14 +21,20 @@ u8 _init(void)
 	emu86_int (&state, 0x10);
 	emu86_exec(&state);
 
-	return 1;	// failed
+	return 0;
 }
 
 void _free(void)
 {
+	assert(!"TODO");
 }
 
-void _get_resolution(u32 * w, u32 * h)
+void _get_text_resolution(u32 * w, u32 * h)
+{
+	assert(!"TODO");
+}
+
+void _get_pixel_resolution(u32 * w, u32 * h)
 {
 	assert(!"TODO");
 }

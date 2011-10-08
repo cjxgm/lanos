@@ -1,6 +1,5 @@
 
 #include "keyboard.h"
-#include "stdio.h"
 #include "isr.h"
 #include "assert.h"
 
@@ -17,7 +16,7 @@ static u8 key_pressed[0x80] = {0};
 static u8 keymap[0x80 * 2] = {
 /* !shift  shift       what 	scan code(hex) */
 	0,		0,		// none		 0
-	27,		27,		// esc		 1
+	0,		0,		// esc		 1
 	'1',	'!',	//			 2
 	'2',	'@',	//			 3
 	'3',	'#',	//			 4

@@ -23,7 +23,7 @@ SOURCES = $(OBJ_BASE)		\
 CC = gcc
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
 		  -fno-builtin -fno-stack-protector -D__DEBUG__
-LDFLAGS = -Tmisc/link.ld
+LDFLAGS = -Tbase/link.ld
 ASFLAGS = -felf
 
 all: $(SOURCES) kernel
