@@ -27,7 +27,7 @@ u8 app_anim(void)
 				clr = 255 - clr;
 				if (clr < 0) clr = 0;
 				clr = clr * contrast / 255;
-				clr = clr << 16;
+				clr = clr << 8;
 				get_video_driver(0)->putpixel(x, y, clr);
 			}
 		}

@@ -82,19 +82,19 @@ void _putpixel(u32 x, u32 y, u32 color)
 			+ 0.691f * clr[2] * clr[2]
 			+ 0.068f * clr[3] * clr[3]) / 255.0f;
 */
-	u8 max = clr[1];
+	u8 max = clr[0];
+	if (clr[1] > max) max = clr[1];
 	if (clr[2] > max) max = clr[2];
-	if (clr[3] > max) max = clr[3];
 	float brightness = max / 255.0f;
 
-	u8 br_ch[] = " ..::--==*%&1ILVG#@==*%&1ILVG#@";
-	u8 br_hi[] = "0000000000000000000111111111111";
+	u8 br_ch[] = " ..--==%*1IL&VG#@%*1IL&VG#@";
+	u8 br_hi[] = "000000000000000001111111111";
 	u8 ch = br_ch[(int)(brightness * (sizeof(br_ch) - 1))];
 	u16 hi = br_hi[(int)(brightness * (sizeof(br_hi) - 1))] - '0';
 	hi = ((hi << 3)
-		| ((clr[1]>0) << 2)
-		| ((clr[2]>0) << 1)
-		| (clr[3]>0)) << 8;
+		| ((clr[0]>0) << 2)
+		| ((clr[1]>0) << 1)
+		| (clr[2]>0)) << 8;
 
 	_putchar(hi | ch, x, y);
 }
