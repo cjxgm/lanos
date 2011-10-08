@@ -1,0 +1,14 @@
+
+2011/10/8		Lanos 0.15 completed.
+
+			+ Completely rewritten video driver interface.
+			+ 'ascii art' for 'normal' video driver.
+			+ app_anim: a simple animation.
+			+ very fast sqrt(square root) algorithm.
+			+ Much more!
+
+
+2011/10/1		Lanos 0.13 is in public!
+
+			The first public release!
+
