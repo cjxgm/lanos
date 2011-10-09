@@ -22,7 +22,6 @@ Introduction
 This project is a sub project of cjsp (Clanjor Selfaction Project) -
 the OS part.<br>
 It uses GRUB to load the kernel written in C.<br>
-It's, eh, just kind of hacking for myself (my bad English...)
 
 Have a try
 ------------------------------------------------------------

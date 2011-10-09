@@ -6,11 +6,12 @@ OBJ_VIDEO = video/monitor.o video/video_driver.o \
 			video/video_driver_normal.o \
 			video/video_driver_vesa.o
 OBJ_MISC = misc/common.o misc/stdio.o misc/assert.o \
-			misc/string.o misc/power.o
+			misc/string.o misc/power.o misc/malloc.o
 OBJ_KEYBOARD = keyboard/keyboard.o keyboard/kb_queue.o
 OBJ_APP = app/lush.o app/anim.o
 OBJ_EMU86 = emu86/emu86.o emu86/emu86_do.o
 OBJ_MATH = math/sqrt.o
+OBJ_LANOSGL = lanosgl/gl.o
 
 SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_KEYBOARD)	\
@@ -18,7 +19,8 @@ SOURCES = $(OBJ_BASE)		\
 		  $(OBJ_VIDEO)		\
 		  $(OBJ_APP)		\
 		  $(OBJ_EMU86)		\
-		  $(OBJ_MATH)
+		  $(OBJ_MATH)		\
+		  $(OBJ_LANOSGL)
 
 CC = gcc
 CFLAGS  = -Wall -Iinclude -ffreestanding -nostdlib -nostdinc \
