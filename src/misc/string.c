@@ -1,5 +1,6 @@
 
 #include "string.h"
+#include "stdio.h"
 
 // is dst starts with src ?
 // if so, return the matched size.
@@ -12,5 +13,16 @@ u32 startswith(const char * dst, const char * src)
 	if (*--p == ' ')
 		return p - dst;
 	return 0;
+}
+
+s8 strcmp(const char * a, const char * b)
+{
+	while (1) {
+		if (*a < *b) return -1;
+		if (*a > *b) return +1;
+		if (!*a && !*b) return 0;
+		a++;
+		b++;
+	}
 }
 

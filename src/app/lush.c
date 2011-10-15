@@ -2,33 +2,52 @@
 #include "app.h"
 #include "stdio.h"
 #include "string.h"
-#include "power.h"
-#include "assert.h"
+
+APP_INTERFACE(lush);
 
 #define BUF_SIZE	255
 
-u8 app_lush(void)
+u8 main(const char * cmdline)
 {
+	if (startswith(cmdline, "--help")) {
+		printf("\n\e%clush - Lanos Ugly SHell\e%c\n", H|R|G|B, R|G|B);
+		printf("\tI think you are using it, right?\n\n");
+		return 0;
+	}
+
 	char buf[BUF_SIZE+1];
 	while (1) {
 		printf("\e%clush\e%c$ \e%c", H|G, H|R|G|B, R|G|B);
 		readline(buf, BUF_SIZE);
 
+		if (!*buf) continue;
+
+		if (startswith(buf, "exit"))
+			return 0;
+
+		struct app * a;
+		u32 i = 0;
 		u32 t;
-		char * p = buf;
+		while ((a = get_app(i++)))
+			if ((t = startswith(buf, a->name))) {
+				char * name    = buf;
+				char * cmdline = buf + t;
+				if (*cmdline) *cmdline++ = 0;
+				if ((t = run_app(name, cmdline)))
+					printf("app returned %d\n", t);
+				goto _app_found;
+			}
 
-		if (!*p) continue;
+		// app not found
+		printf("\e%cinvalid command: \e%c%s\e%c\n", H|R, H|R|G, buf, R|G|B);
 
+_app_found:
+		get_app(0);	// nop
+
+/*
 		else if ((t = startswith(buf, "help"))) {
-			printf("\thelp			show this help\n");
-			//   one more tab here .-v-. is a must.
-			printf("\tcls				clear screen\n");
-			printf("\thello			show \"Hello, world\"\n");
-			printf("\techo			show arguments of it\n");
-			printf("\tvideo			run emu86 to execute int 10h\n");
-			printf("\tanim			draw an animation (ESC to quit)\n");
-			printf("\treboot			reboot the computer\n");
-			printf("\tpoweroff		shutdown the OS\n");
+			struct app * a;
+			int i = 0;
 		}
 
 		else if ((t = startswith(buf, "cls")))
@@ -59,6 +78,7 @@ u8 app_lush(void)
 
 		else printf("\e%cUnknown command: \e%c%s\e%c\n",
 				H|R, H|R|B, buf, R|G|B);
+	*/
 	}
 	return 0;
 }
