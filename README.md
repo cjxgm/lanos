@@ -5,11 +5,12 @@ by eXerigumo Clanjor
 
 <h2>中文文档见 doc 目录(see doc/ for Chinese document)</h2>
 
+Copyright (C) eXerigumo Clanjor (兰威举/哆啦比猫), 2010-2011.
 All the codes are licensed under GPLv2,<br>
-and all the artworks/documents are licensed under CC-BY-SA 3.0,<br>
-*ABSOLUTELY NO WARRANTY!*
+and all the artworks/documents are licensed under CC-BY-SA 3.0.<br>
+*It comes with ABSOLUTELY NO WARRANTY!*
 
-Screenshots
+Screenshots (0.13 old release)
 ------------------------------------------------------------
 Lanos on a real machine!<br>
 ![](https://github.com/cjxgm/lanos/raw/master/screenshots/01.jpg)
@@ -23,12 +24,32 @@ This project is a sub project of cjsp (Clanjor Selfaction Project) -
 the OS part.<br>
 It uses GRUB to load the kernel written in C.<br>
 
-Have a try
+Definition and Goals
 ------------------------------------------------------------
-You need _qemu_/_bochs_(either is ok), _gcc_, _ld_, _nasm_, _make_
+Lanos is a 32-bit not-so-protected non-UNIX-clone OS. Useful function
+will be implemented as earliest as possible. Lanos will provide
+LanosGL(there's OpenGL maybe), digital audio, high resolution,
+single process with multi-threads, etc. supports.
+All the applications must (yet) be hard-coded into the kernel.
 
-After having them installed, you type following command
-if you are using bochs:
+Lanos is a toy for hackers. Iy can be used for bootable demoscene.
+
+Have a Try
+------------------------------------------------------------
+You need _gcc_, _ld_, _nasm_ and _make_ to compile the source code,
+and you need _qemu_ or _bochs_ to run it (if you don't want to install it).
+
+Having them installed, you type following command
+to get the source code (Linux):
+
+	git clone git://github.com/cjxgm/lanos.git
+
+Then, compile the kernel (*it needs the root permission
+to mount the floppy image*):
+
+	make
+
+Then, run it. If you are using bochs, type:
 
 	make debug
 
@@ -38,19 +59,21 @@ Or for qemu users:
 
 Then, the source codes will be compiled and linked, and a floppy
 image called _floppy.img_ will be created with the kernel compiled
-copied in (*this will need the root's permission*). Finally, the
-virtual machine will run. As this OS is in the very alpha stage,
-you can only see the output for testing.
+copied in (*it is this step that needs the root's permission*).
+Finally, the virtual machine will run.
 
-You can try to modify it. The main code is src/main.c. *Before you do it,
-set your editor's tab width to 4 spaces!*
+You can try modifying it. The init code is src/base/init.c.
+But, you have to obey the Lanos Coding Style.
 
-And, i have to tell you, that when you press ESC, the system will
-hang up (on purpose).
+Lanos Coding Style
+------------------------------------------------------------
+The Lanos Coding Style is just as same as the Linux Kernel Coding Style,
+*except that you MUST set your editor's tab width to 4 space-wide!*
 
 Issues
 ------------------------------------------------------------
-("\*" means have been solved)
+("\*" means "solved", "X" means "canceled")
 
  * 2011/9/11 * Add timer, but does not work.
- * 2011/9/18&nbsp;&nbsp;&nbsp;Add video 1024x768x24 mode, but do not work.
+ * 2011/9/18 X Add video 1024x768x24 mode, but do not work.
+
