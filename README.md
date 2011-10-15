@@ -26,10 +26,10 @@ It uses GRUB to load the kernel written in C.<br>
 
 Definition and Goals
 ------------------------------------------------------------
-Lanos is a 32-bit not-so-protected non-UNIX-clone OS. Useful function
+Lanos is a 32-bit not-so-protected non-UNIX-clone OS. Useful functions
 will be implemented as earliest as possible. Lanos will provide
-LanosGL(there's OpenGL maybe), digital audio, high resolution,
-single process with multi-threads, etc. supports.
+LanosGL (there's OpenGL maybe), digital audio, high resolution,
+single process with multi-threads, etc.
 All the applications must (yet) be hard-coded into the kernel.
 
 Lanos is a toy for hackers. Iy can be used for bootable demoscene.
