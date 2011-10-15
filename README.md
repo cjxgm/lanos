@@ -3,9 +3,9 @@ lanos - Lanos' AN OS
 The Lanos Project<br>
 by eXerigumo Clanjor
 
-<h2>中文文档见 doc 目录(see doc/ for Chinese document)</h2>
+<h3>中文文档见 doc 目录(see doc/ for Chinese document)</h3>
 
-Copyright (C) eXerigumo Clanjor (兰威举/哆啦比猫), 2010-2011.
+Copyright (C) eXerigumo Clanjor (兰威举/哆啦比猫), 2010-2011.<br>
 All the codes are licensed under GPLv2,<br>
 and all the artworks/documents are licensed under CC-BY-SA 3.0.<br>
 *It comes with ABSOLUTELY NO WARRANTY!*
