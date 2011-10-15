@@ -18,15 +18,13 @@ u8 app_anim(void)
 		gl_clear();
 		//gl_plot(0, 0, 0, 0xFFFFFFFF);
 		//gl_plot(4, 4, 10, 0xC00000FF);  // test alpha
-		gl_line(0, 0, 0, 1, t, 10, 0xFFFFFFFF, 0xFFFF00FF);
+		gl_line(0, 0, 0, t*2, 10, 10, 0xFFFFFFFF, 0xFFFF00FF);
 		gl_swap();
 
 		t += 0.1;
 		if (t > 20) t = 0;
 
-		// wait
-		u32 t = get_ticks();
-		while ((get_ticks() - t) * 1000 / TICKS_PER_SEC < 10);
+		wait(10);
 	}
 
 	gl_free();

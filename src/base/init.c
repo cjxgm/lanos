@@ -28,7 +28,7 @@ int init(struct mboot_info * mb_info)
 	init_monitor();
 
 	clear_screen();
-	printf("\n\n\e%cWelcome to lanos %s\n"
+	printf("\n\e%cWelcome to Lanos %s!\n"
 		   "\e%cbuilt on %s at %s\e%c\n\n",
 		   H|G, LANOS_VERSION, H|G|B, __DATE__, __TIME__, R|G|B);
 

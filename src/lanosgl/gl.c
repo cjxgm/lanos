@@ -84,7 +84,7 @@ void gl_plot(float x, float y, float z, u32 color)
 	if (x < 0 || y < 0 || x >= view_w || y >= view_h)
 		return;
 
-	u32 pos = (y + view_y) * win_w + x + view_x;
+	u32 pos = ((u32)(y + view_y)) * win_w + x + view_x;
 	if (z < buf_depth[pos]) {
 		buf_depth[pos] = z;
 		buf_color[pos] = gl_mix_color(buf_color[pos], color);
@@ -127,8 +127,7 @@ void gl_line(float x0, float y0, float z0,
 		float z = (z1 - z0) * i / d + z0;
 		if (x<0 || y<0) continue;
 		u32 color = gl_mix_color(color1,
-								 (color2 & 0x00FFFFFF) | ((u8)(0xFF * i / d)<<24));
+					(color2 & 0x00FFFFFF) | ((u8)(0xFF * i / d)<<24));
 		gl_plot(x, y, z, color);
-		//		printf("%X\n", color);
 	}
 }

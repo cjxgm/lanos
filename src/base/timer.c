@@ -2,18 +2,18 @@
 #include "timer.h"
 #include "isr.h"
 
-static u32 ticks = 0;
+static u32 clocks = 0;
 
 static void timer_cb(regs_t regs)
 {
-	ticks++;
+	clocks++;
 }
 
 void init_timer(void)
 {
 	register_irq_handler(IRQ_TIMER, &timer_cb);
 
-	u32 divisor = 1193180 / TICKS_PER_SEC;
+	u32 divisor = 1193180 / CLOCKS_PER_SEC;
 
 	// send the command byte.
 	outb(0x43, 0x36);
@@ -28,8 +28,7 @@ void init_timer(void)
 	outb(0x40, h);
 }
 
-u32 get_ticks(void)
+u32 clock(void)
 {
-	return ticks;
+	return clocks;
 }
-
