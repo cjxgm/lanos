@@ -74,6 +74,6 @@ Issues
 ------------------------------------------------------------
 ("\*" means "solved", "X" means "canceled")
 
- * 2011/9/11 * Add timer, but does not work.
- * 2011/9/18 X Add video 1024x768x24 mode, but do not work.
+ * 2011/09/11 * Add timer, but does not work.
+ * 2011/09/18 X Add video 1024x768x24 mode, but do not work.
 
