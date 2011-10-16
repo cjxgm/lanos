@@ -3,7 +3,6 @@
 
 /* TODO: give it a better algorithm */
 
-// start allocate memory from 1MB place in the memory
 static void * mem = (void *)0x1000000;
 
 void * malloc(u32 size)
