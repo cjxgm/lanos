@@ -2,11 +2,15 @@
 2011/??/??		Lanos 0.16 ??????????
 
 			+ completely new app interface
-			+ LanosGL
+			+ LanosGL (not done yet)
 			+ startup animation
 			@ rewrote lush for the new app interface
 			@ adjusted init code
 			@ modified docs
+			+ completely new malloc algorithm!
+			@ adjusted kernel start address to 2mb
+			@ reconfigured esp to the proper address
+			+ use finit to init FPU in the correct way.
 			? ????????
 
 
