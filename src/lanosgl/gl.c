@@ -18,6 +18,8 @@ static u32 view_h;
 
 static u32   * buf_color = NULL;
 static float * buf_depth = NULL;
+static float   persp_param;
+static float   aspect_ratio;
 
 /** high level API **/
 
@@ -76,6 +78,27 @@ void gl_swap(void)
 			putpixel(x+win_x, h-y-win_y-1, buf_color[y*win_w+x]);
 }
 
+void gl_persp(float pp, float ar)
+{
+	persp_param  = pp;
+	aspect_ratio = ar;
+}
+
+void gl_begin(u32 draw_what)
+{
+}
+
+void gl_end(void)
+{
+}
+
+void gl_color(float r, float g, float b, float a)
+{
+}
+
+void gl_vert(float x, float y, float z)
+{
+}
 
 /** low level API **/
 
