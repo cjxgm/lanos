@@ -76,4 +76,5 @@ Issues
 
  * 2011/09/11 * Add timer, but does not work.
  * 2011/09/18 X Add video 1024x768x24 mode, but do not work.
-
+ * 2011/10/16&nbsp;&nbsp;&nbsp;sin/cos does not work properly, and
+   printf("%g\n", PI), neither.

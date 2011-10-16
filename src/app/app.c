@@ -7,12 +7,14 @@ extern struct app app_logo;
 extern struct app app_lush;
 extern struct app app_help;
 extern struct app app_cls;
+extern struct app app_debug;
 
 struct app * app[] = {
 	&app_logo,
 	&app_lush,
 	&app_help,
 	&app_cls,
+	&app_debug,
 };
 
 struct app * get_app(u32 id)

@@ -9,6 +9,7 @@ static void print_hex_32(u32 data);
 static void print_hex_8(u8 data);
 static void print_dec_u32(u32 data);
 static void print_dec_s32(s32 data);
+static void print_float_g(float f);
 
 void printf(const char * fmt, ...)
 {
@@ -54,6 +55,12 @@ void printf(const char * fmt, ...)
 						tmp = *(char **)p;
 						while (*tmp)
 							putchar(*tmp++);
+						p += 4;
+						break;
+					case 'G':	// I'm lazy...
+					case 'g':
+					printf("%d\t", (s32)(*(float *)p * 100));
+						print_float_g(*(float *)p);
 						p += 4;
 						break;
 					default:
@@ -118,6 +125,28 @@ void print_dec_s32(s32 data)
 		data = -data;
 	}
 	print_dec_u32(data);
+}
+
+void print_float_g(float f)
+{
+	s32 s = f;
+	print_dec_s32(s);
+	putchar('.');
+	f -= s;
+
+	if (f == 0.0f) {
+		putchar('0');
+		return;
+	}
+
+/*
+	while (f != 0.0f) {
+		f *= 10.0f;
+		s  = f;
+		f -= s;
+		print_dec_s32(s);
+	}
+	*/
 }
 
 /********** scanf **********/

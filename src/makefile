@@ -8,9 +8,9 @@ OBJ_VIDEO = video/monitor.o video/video_driver.o \
 OBJ_MISC = misc/common.o misc/stdio.o misc/assert.o \
 			misc/string.o misc/power.o misc/malloc.o
 OBJ_KEYBOARD = keyboard/keyboard.o keyboard/kb_queue.o
-OBJ_APP = app/app.o app/logo.o app/lush.o app/help.o app/cls.o
+OBJ_APP = app/app.o app/logo.o app/lush.o app/help.o app/cls.o app/debug.o
 OBJ_EMU86 = emu86/emu86.o emu86/emu86_do.o
-OBJ_MATH = math/sqrt.o
+OBJ_MATH = math/sqrt.o math/sin.o
 OBJ_LANOSGL = lanosgl/gl.o
 
 SOURCES = $(OBJ_BASE)		\
