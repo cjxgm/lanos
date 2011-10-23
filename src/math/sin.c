@@ -7,8 +7,8 @@ static double _pow(double x, double y);
 
 float sin(float x)
 {
-	while (x < -PI) x += PI;
-	while (x >= PI) x -= PI;
+	while (x < -PI) x += 2*PI;
+	while (x >= PI) x -= 2*PI;
 
 	return x - _pow(x, 3) / _fac(3)
 			 + _pow(x, 5) / _fac(5)
