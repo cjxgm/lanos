@@ -59,9 +59,10 @@ void printf(const char * fmt, ...)
 						break;
 					case 'G':	// I'm lazy...
 					case 'g':
-					printf("%d\t", (s32)(*(float *)p * 100));
-						print_float_g(*(float *)p);
-						p += 4;
+						// gcc transforms float to double
+						// when passed to a function?
+						print_float_g(*(double *)p);
+						p += 8;
 						break;
 					default:
 						putchar(ch);
@@ -129,24 +130,26 @@ void print_dec_s32(s32 data)
 
 void print_float_g(float f)
 {
+	if (f < 0) {
+		printf("-");
+		f = -f;
+	}
+
 	s32 s = f;
-	print_dec_s32(s);
-	putchar('.');
+	printf("%d.", s);
 	f -= s;
 
 	if (f == 0.0f) {
-		putchar('0');
+		printf("0");
 		return;
 	}
 
-/*
 	while (f != 0.0f) {
-		f *= 10.0f;
+		f *= 10;
 		s  = f;
 		f -= s;
-		print_dec_s32(s);
+		printf("%d", s);
 	}
-	*/
 }
 
 /********** scanf **********/

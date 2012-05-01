@@ -32,8 +32,8 @@ u8 main(const char * cmdline)
 
 	float i;
 	for (i=-2*PI; i<2*PI; i+=0.1) {
-		pf(sin(i));
-		printf("\n");
+		//pf(sin(i));
+		printf("%g\n", sin(i));
 		wait(100);
 	}
 
@@ -42,6 +42,10 @@ u8 main(const char * cmdline)
 
 void pf(float f)
 {
+	if (f < 0) {
+		printf("-");
+		f = -f;
+	}
 	s32 s = f;
 	printf("%d.", s);
 	f -= s;
