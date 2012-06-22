@@ -5,9 +5,9 @@ by eXerigumo Clanjor
 
 <h3>中文文档见 doc 目录(see doc/ for Chinese document)</h3>
 
-Copyright (C) eXerigumo Clanjor (兰威举/哆啦比猫), 2010-2011.<br>
+Copyright (C) eXerigumo Clanjor (兰威举/哆啦比猫), 2010-2012.<br>
 All the codes are licensed under GPLv2,<br>
-and all the artworks/documents are licensed under CC-BY-SA 3.0.<br>
+and all the artworks and documents are licensed under CC-BY-SA 3.0.<br>
 *It comes with ABSOLUTELY NO WARRANTY!*
 
 Screenshots (0.13 old release)
@@ -32,7 +32,7 @@ LanosGL (there's OpenGL maybe), digital audio, high resolution,
 single process with multi-threads, etc.
 All the applications must (yet) be hard-coded into the kernel.
 
-Lanos is a toy for hackers. Iy can be used for bootable demoscene.
+Lanos is a toy for hackers. It can be used for bootable demoscene.
 
 Have a Try
 ------------------------------------------------------------
