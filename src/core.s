@@ -12,27 +12,34 @@ init:
 	mov		ax, cs
 	mov		ds, ax
 
-main:
-	mov		ax, 0b800h
+	; init stack
+	mov		ax, 800h
 	mov		es, ax
+	mov		sp, 0ffffh
+
+	; init video memory
+	mov		ax, 0b800h
+	mov		gs, ax
+
+
+main:
 	mov		al, 'X'
 	mov		ah, 01110000b
-	mov		[es:160*2+0], ax
+	mov		[gs:160*2+0], ax
 	call	test2
 	jmp		$
 
 
 
 
-times 800h db 0		; test bigger file
+times 800h db 0		; test with bigger file
 
 
 
 
 test2:
-	mov		ax, 0b800h
-	mov		es, ax
 	mov		al, 'T'
 	mov		ah, 01110000b
-	mov		[es:160*2+2], ax
+	mov		[gs:160*2+2], ax
 	ret
+
