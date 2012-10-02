@@ -16,7 +16,7 @@ debug:
 	@gdb -x debug.gdb
 
 floppy: bin
-	@./src/mkfloppy floppy.img src/boot src/core
+	@./src/mkfloppy floppy.img src/boot src/lander src/core
 
 bin:
 	@make -C src
