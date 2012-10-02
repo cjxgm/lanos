@@ -22,24 +22,65 @@ init:
 	mov		gs, ax
 
 
+
 main:
-	mov		al, 'X'
-	mov		ah, 01110000b
-	mov		[gs:160*2+0], ax
-	call	test2
+	; enter 320x200x256 mode
+	xor		ah, ah
+	mov		al, 13h
+	int		10h
+	mov		ax, 0A000h
+	mov		gs, ax
+
+	call	draw
+
+	; wait a key
+	xor		ah, ah
+	int		16h
+	; al <-- key pressed
+
+	; back to text mode
+	xor		ah, ah
+	mov		al, 3h
+	int		10h
+
 	jmp		$
 
 
+; void draw()
+draw:
+	mov		cx, 199
+.1:
+	mov		bx, cx
+	mov		cx, 319
+.0:
+	mov		ax, cx
+	mov		dl, al
+	add		dl, bl
+	call	plot
+	dec		cx
+	jnz		.0
 
+	mov		cx, bx
+	dec		cx
+	jnz		.1
 
-times 800h db 0		; test with bigger file
+	ret
 
+; void plot(ax x, bx y, dl color)
+plot:
+	push bx
+	push cx
 
+	; offset = (y<<8) + (y<<6) + x
+	mov		cx, bx
+	shl		bx, 8
+	shl		cx, 6
+	add		bx, cx
+	add		bx, ax
 
+	mov		[gs:bx], dl
 
-test2:
-	mov		al, 'T'
-	mov		ah, 01110000b
-	mov		[gs:160*2+2], ax
+	pop		cx
+	pop		bx
 	ret
 
