@@ -1,6 +1,9 @@
 
 ;vim: ft=nasm ts=4 sw=4 sts=0 noet
 
+; lander - the LANos loaDER, stage 1
+; for loading the stage 2
+
 [org 7c00h]
 
 [bits 16]
